@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Speak with the Alif Laam Meem Jewellers voice concierge." />
+    <title>ALM Voice Concierge — Alif Laam Meem Jewellers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Playfair+Display:ital,wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="voice-concierge.css" />
+  </head>
+  <body>
+    <div class="page-glow glow-one"></div><div class="page-glow glow-two"></div>
+    <header class="voice-header">
+      <a href="index.html" class="home-link"><span>←</span> Back to the collection</a>
+      <a href="index.html" class="voice-brand" aria-label="Alif Laam Meem Jewellers home"><span>ا ل م</span><b>ALIF LAAM MEEM<small>JEWELLERS</small></b></a>
+      <a href="https://wa.me/923244449745" target="_blank" rel="noopener noreferrer" class="header-contact">Need a person? <span>WhatsApp ↗</span></a>
+    </header>
+
+    <main>
+      <section class="voice-hero">
+        <div class="voice-intro">
+          <p class="eyebrow">ALM VOICE CONCIERGE</p>
+          <h1>A more personal way<br/>to find your <em>forever.</em></h1>
+          <p>Speak naturally. Our live concierge can guide you through 21K gold, bridal pieces, PKR pricing, bespoke jewellery and showroom visits.</p>
+        </div>
+
+        <div class="voice-stage" aria-live="polite">
+          <div class="voice-orbit orbit-one"></div><div class="voice-orbit orbit-two"></div>
+          <button class="voice-orb" id="voice-orb" aria-label="Start voice conversation" aria-pressed="false"><span class="orb-core"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="10" y="4" width="8" height="13" rx="4"></rect><path d="M6.8 13.5a7.2 7.2 0 0 0 14.4 0M14 21v3M10 24h8"></path></svg></span><span class="orb-ripple ripple-a"></span><span class="orb-ripple ripple-b"></span></button>
+          <div class="voice-status"><span class="status-dot"></span><strong id="voice-state">Voice ready</strong><small id="voice-help">Tap the orb and allow microphone access</small></div>
+        </div>
+
+        <div class="live-transcript" aria-live="polite">
+          <p class="eyebrow">LIVE CONVERSATION</p>
+          <div class="transcript-window" id="transcript-window"><div class="transcript-line bot"><span>ALM</span><p>Assalam-o-alaikum. I am here whenever you are ready. What would you like to discover?</p></div></div>
+          <form class="voice-text-form" id="voice-text-form"><label class="sr-only" for="voice-text-input">Type a message to the voice concierge</label><input id="voice-text-input" autocomplete="off" placeholder="Or type your question here" /><button type="submit">Send <span>↑</span></button></form>
+        </div>
+      </section>
+
+      <section class="voice-topics" aria-label="Suggested questions">
+        <p>Try asking</p>
+        <div><button data-question="Show me bridal jewellery">“Show me bridal jewellery”</button><button data-question="What is the 21K gold rate today?">“What is today’s 21K rate?”</button><button data-question="I would like custom jewellery">“I would like custom jewellery”</button><button data-question="Where is your Lahore showroom?">“Where is your showroom?”</button></div>
+      </section>
+
+      <section class="voice-note"><span>✦</span><p>For an exact quote, stone availability, or a private viewing, the concierge will guide you to our jewellery team.</p><a href="mailto:AlifLaamMeemjewellers@gmail.com">Email our team ↗</a></section>
+    </main>
+    <script src="voice-concierge.js"></script>
+  </body>
+</html>
