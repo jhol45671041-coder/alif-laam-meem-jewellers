@@ -130,6 +130,10 @@ const conciergeLauncher = document.querySelector('.concierge-launcher');
 const conciergeMessages = document.querySelector('.concierge-messages');
 const conciergeForm = document.querySelector('.concierge-form');
 const conciergeInput = document.querySelector('#concierge-input');
+const voiceTrigger = document.querySelector('.voice-trigger');
+const conciergeStatus = document.querySelector('#concierge-status');
+let voiceRecognition;
+let isVoiceListening = false;
 
 function openConcierge() {
   conciergePanel.classList.add('active');
@@ -139,6 +143,7 @@ function openConcierge() {
 }
 
 function closeConcierge() {
+  if (isVoiceListening && voiceRecognition) voiceRecognition.stop();
   conciergePanel.classList.remove('active');
   conciergePanel.setAttribute('aria-hidden', 'true');
   conciergeLauncher.setAttribute('aria-expanded', 'false');
@@ -151,6 +156,61 @@ function appendConciergeMessage(role, message, isTyping = false) {
   conciergeMessages.appendChild(bubble);
   conciergeMessages.scrollTop = conciergeMessages.scrollHeight;
   return bubble;
+}
+
+function updateVoiceStatus(listening, label = 'Voice ready') {
+  isVoiceListening = listening;
+  voiceTrigger.classList.toggle('listening', listening);
+  voiceTrigger.setAttribute('aria-pressed', String(listening));
+  voiceTrigger.querySelector('strong').textContent = listening ? 'Listening…' : 'Talk to ALM';
+  voiceTrigger.querySelector('small').textContent = listening ? 'Speak naturally, then pause' : 'Tap and ask a question';
+  conciergeStatus.innerHTML = `<i></i> ${label}`;
+}
+
+function speakConciergeReply(message) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const spoken = new SpeechSynthesisUtterance(message);
+  spoken.lang = 'en-PK';
+  spoken.rate = .93;
+  spoken.pitch = 1.03;
+  window.speechSynthesis.speak(spoken);
+}
+
+function beginVoiceConversation() {
+  const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!Recognition) {
+    appendConciergeMessage('bot', 'Voice input is not available in this browser. You can still type your question below.');
+    return;
+  }
+  if (isVoiceListening && voiceRecognition) {
+    voiceRecognition.stop();
+    return;
+  }
+
+  voiceRecognition = new Recognition();
+  voiceRecognition.lang = 'en-PK';
+  voiceRecognition.continuous = false;
+  voiceRecognition.interimResults = true;
+  let hasFinalAnswer = false;
+  updateVoiceStatus(true, 'Listening live');
+
+  voiceRecognition.onresult = event => {
+    let transcript = '';
+    for (let index = event.resultIndex; index < event.results.length; index += 1) transcript += event.results[index][0].transcript;
+    conciergeInput.value = transcript.trim();
+    const latest = event.results[event.results.length - 1];
+    if (latest.isFinal && transcript.trim() && !hasFinalAnswer) {
+      hasFinalAnswer = true;
+      sendConciergeMessage(transcript.trim(), true);
+      conciergeInput.value = '';
+    }
+  };
+  voiceRecognition.onerror = event => {
+    if (event.error !== 'aborted' && event.error !== 'no-speech') appendConciergeMessage('bot', 'I could not hear that clearly. Please try the microphone again or type your question.');
+  };
+  voiceRecognition.onend = () => updateVoiceStatus(false, 'Voice ready');
+  voiceRecognition.start();
 }
 
 function conciergeReply(question) {
@@ -197,14 +257,16 @@ function conciergeReply(question) {
   return 'I can help with 21K jewellery, PKR pricing, today’s gold rates, bridal pieces, bespoke orders, or visiting our Lahore showroom. What would you like to explore?';
 }
 
-function sendConciergeMessage(message) {
+function sendConciergeMessage(message, speakReply = false) {
   const question = message.trim();
   if (!question) return;
   appendConciergeMessage('user', question);
   const typing = appendConciergeMessage('bot', '•••', true);
   window.setTimeout(() => {
     typing.remove();
-    appendConciergeMessage('bot', conciergeReply(question));
+    const response = conciergeReply(question);
+    appendConciergeMessage('bot', response);
+    if (speakReply) speakConciergeReply(response);
   }, 420);
 }
 
@@ -409,6 +471,7 @@ conciergeForm.addEventListener('submit', event => {
   conciergeInput.value = '';
 });
 document.querySelectorAll('.concierge-prompts button').forEach(button => button.addEventListener('click', () => sendConciergeMessage(button.dataset.prompt)));
+voiceTrigger.addEventListener('click', beginVoiceConversation);
 
 document.querySelector('.account-trigger').addEventListener('click', () => showToast('Your client account experience is coming soon.'));
 document.querySelector('.menu-toggle').addEventListener('click', event => { const button = event.currentTarget; const nav = document.querySelector('.mobile-nav'); const open = nav.classList.toggle('active'); button.classList.toggle('active', open); button.setAttribute('aria-expanded', open); nav.setAttribute('aria-hidden', !open); });
