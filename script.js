@@ -172,7 +172,7 @@ function speakConciergeReply(message) {
   window.speechSynthesis.cancel();
   const spoken = new SpeechSynthesisUtterance(message);
   spoken.lang = 'en-PK';
-  spoken.rate = .93;
+  spoken.rate = 1.05;
   spoken.pitch = 1.03;
   window.speechSynthesis.speak(spoken);
 }
@@ -261,13 +261,9 @@ function sendConciergeMessage(message, speakReply = false) {
   const question = message.trim();
   if (!question) return;
   appendConciergeMessage('user', question);
-  const typing = appendConciergeMessage('bot', '•••', true);
-  window.setTimeout(() => {
-    typing.remove();
-    const response = conciergeReply(question);
-    appendConciergeMessage('bot', response);
-    if (speakReply) speakConciergeReply(response);
-  }, 420);
+  const response = conciergeReply(question);
+  appendConciergeMessage('bot', response);
+  if (speakReply) speakConciergeReply(response);
 }
 
 function showToast(message) {
@@ -460,10 +456,6 @@ document.querySelector('.appointment-form').addEventListener('submit', event => 
 
 document.querySelector('.newsletter-form').addEventListener('submit', event => { event.preventDefault(); const form = event.currentTarget; form.querySelector('.form-message').textContent = 'Thank you — we will be in touch with something beautiful.'; form.reset(); });
 
-conciergeLauncher.addEventListener('click', () => {
-  if (conciergePanel.classList.contains('active')) closeConcierge();
-  else openConcierge();
-});
 document.querySelector('.concierge-close').addEventListener('click', closeConcierge);
 conciergeForm.addEventListener('submit', event => {
   event.preventDefault();

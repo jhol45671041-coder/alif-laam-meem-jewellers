@@ -43,27 +43,60 @@ function speak(message) {
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(message);
   utterance.lang = 'en-PK';
-  utterance.rate = .92;
+  utterance.rate = 1.05;
   utterance.pitch = 1.03;
   window.speechSynthesis.speak(utterance);
 }
+
+// Warm up the speech engine on the first tap so the first spoken reply starts instantly.
+function warmUpSpeech() {
+  window.removeEventListener('pointerdown', warmUpSpeech);
+  if (!('speechSynthesis' in window)) return;
+  const warm = new SpeechSynthesisUtterance(' ');
+  warm.volume = 0;
+  window.speechSynthesis.speak(warm);
+}
+window.addEventListener('pointerdown', warmUpSpeech);
 
 function formatPKR(amount) {
   return `PKR ${Math.round(amount / 100) * 100}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-async function currentGoldRate() {
+let rateCache = null;
+let rateFetch = null;
+
+async function fetchGoldRate() {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 2500);
   try {
-    const response = await fetch(RATE_API, { headers: { Accept: 'application/json' } });
+    const response = await fetch(RATE_API, { headers: { Accept: 'application/json' }, signal: controller.signal });
     if (!response.ok) throw new Error('Rate unavailable');
     const data = await response.json();
     const rate24 = Number(data?.xau?.price) * TOLA_IN_GRAMS;
     if (!Number.isFinite(rate24)) throw new Error('Invalid rate');
-    const rate21 = rate24 * 21 / 24;
-    return `Today’s indicative 21K rate is ${formatPKR(rate21)} per tola. The 24K rate is ${formatPKR(rate24)} per tola. Rates refresh daily.`;
-  } catch (_) {
-    return 'Our live gold-rate feed is temporarily unavailable. Please check the Today’s Gold Rate section on the collection page again shortly.';
+    rateCache = { rate21: rate24 * 21 / 24, rate24, at: Date.now() };
+    return rateCache;
+  } finally {
+    clearTimeout(timeout);
   }
+}
+
+// Prefetch the gold rate the moment the page opens, so rate answers are instant.
+rateFetch = fetchGoldRate().catch(() => null);
+
+function rateMessage(rate21, rate24) {
+  return `Today’s indicative 21K rate is ${formatPKR(rate21)} per tola. The 24K rate is ${formatPKR(rate24)} per tola. Rates refresh daily.`;
+}
+
+async function currentGoldRate() {
+  if (rateCache) {
+    if (Date.now() - rateCache.at > 5 * 60 * 1000) rateFetch = fetchGoldRate().catch(() => null);
+    return rateMessage(rateCache.rate21, rateCache.rate24);
+  }
+  const fresh = await rateFetch;
+  if (fresh) return rateMessage(fresh.rate21, fresh.rate24);
+  rateFetch = fetchGoldRate().catch(() => null);
+  return 'Our live gold-rate feed is temporarily unavailable. Please check the Today’s Gold Rate section on the collection page again shortly.';
 }
 
 async function answer(question) {
@@ -80,9 +113,12 @@ async function answer(question) {
 
 async function respond(question, useVoice = false) {
   addTranscript('user', question);
-  const thinking = addTranscript('bot', 'One moment, please…', true);
-  const reply = await answer(question);
-  thinking.remove();
+  const pending = answer(question);
+  let thinking = null;
+  const thinkingTimer = setTimeout(() => { thinking = addTranscript('bot', 'One moment, please…', true); }, 200);
+  const reply = await pending;
+  clearTimeout(thinkingTimer);
+  if (thinking) thinking.remove();
   interimLine = null;
   addTranscript('bot', reply);
   if (useVoice) speak(reply);
@@ -135,6 +171,10 @@ function startVoice() {
 }
 
 orb.addEventListener('click', startVoice);
+
+// Open straight into the live experience: start listening as soon as the page loads.
+if (window.SpeechRecognition || window.webkitSpeechRecognition) startVoice();
+
 textForm.addEventListener('submit', event => {
   event.preventDefault();
   const question = textInput.value.trim();
