@@ -258,3 +258,5 @@ body.midnight .mobile-appointment { color: #e3b65b; }
   .concierge-prompts { display: none; }
   .concierge-panel { bottom: 112px; max-height: calc(100svh - 126px); }
 }
+
+.concierge-full-link { padding: 9px 17px 0; display: flex; justify-content: space-between; color: #e6bd61; font-size: 10px; transition: color .2s; }.concierge-full-link:hover { color: #f4d488; }.concierge-full-link span { font-size: 14px; line-height: .8; }
