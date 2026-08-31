@@ -247,3 +247,14 @@ body.midnight .mobile-appointment { color: #e3b65b; }
 .concierge-voice { padding: 9px 17px; border-bottom: 1px solid rgba(238, 232, 218, .12); }
 .voice-trigger { width: 100%; padding: 9px 10px; display: flex; align-items: center; gap: 9px; color: #e8e5dd; border: 1px solid #4f5b50; border-radius: 3px; background: #1a211b; text-align: left; transition: border-color .2s, background .2s; }.voice-trigger:hover { border-color: #e6bd61; background: #202a20; }.voice-trigger svg { width: 23px; height: 23px; flex: 0 0 auto; fill: none; stroke: #e8be63; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }.voice-trigger span { display: grid; gap: 1px; flex: 1; }.voice-trigger strong { font-size: 11px; font-weight: 600; }.voice-trigger small { color: #abb0a7; font-size: 9px; }.voice-trigger b { padding: 3px 5px; color: #1b211a; border-radius: 2px; background: #e6bd61; font: 8px var(--mono); letter-spacing: .07em; }.voice-trigger.listening { color: #fff; border-color: #64c985; background: #1b3a28; }.voice-trigger.listening svg { stroke: #9ff4b6; animation: micPulse .9s ease-in-out infinite alternate; }.voice-trigger.listening b { color: #f2fff3; background: #319456; }
 @keyframes micPulse { from { transform: scale(1); } to { transform: scale(1.16); } }
+
+/* Keep the on-site assistant comfortable on small phone screens. */
+@media (max-width: 700px) {
+  .concierge-panel { max-height: calc(100svh - 138px); display: flex; flex-direction: column; }
+  .concierge-messages { min-height: 135px; height: auto; flex: 1 1 auto; }
+  .concierge-form input { font-size: 16px; }
+}
+@media (max-height: 620px) and (max-width: 700px) {
+  .concierge-prompts { display: none; }
+  .concierge-panel { bottom: 112px; max-height: calc(100svh - 126px); }
+}
