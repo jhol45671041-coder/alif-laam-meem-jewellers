@@ -35,8 +35,11 @@ const cartDrawer = document.querySelector('.cart-drawer');
 const overlay = document.querySelector('#overlay');
 const toast = document.querySelector('.toast');
 const GOLD_RATE_API = 'https://xaus.com/api/v1/spot?currency=PKR&unit=gram&compact=1';
+const SPOT_API = 'https://api.gold-api.com/price/XAU';
+const FX_API = 'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json';
 const GOLD_RATE_CACHE_KEY = 'alm-pkr-gold-rate';
 const TOLA_IN_GRAMS = 11.6638038;
+const TROY_OUNCE_IN_GRAMS = 31.1034768;
 
 function formatWeight(product) {
   const grams = Number(product.weight);
@@ -101,6 +104,30 @@ function applyGoldRate(rate, isLive = true) {
     : `Last saved ${formatRateTimestamp(rate.timestamp)} PKT · Refreshing when available`;
 }
 
+async function fetchSpotGramPkr() {
+  try {
+    const response = await fetch(GOLD_RATE_API, { headers: { Accept: 'application/json' } });
+    if (!response.ok) throw new Error(`Gold rate response: ${response.status}`);
+    const data = await response.json();
+    const gram24k = Number(data?.xau?.price);
+    if (!Number.isFinite(gram24k) || gram24k <= 0) throw new Error('Gold rate data was incomplete');
+    return { gram24k, timestamp: data.updated_at || data?.data_state?.as_of || new Date().toISOString() };
+  } catch (_) {
+    // Backup source: live USD gold spot converted to PKR.
+    const [spotResponse, fxResponse] = await Promise.all([
+      fetch(SPOT_API, { headers: { Accept: 'application/json' } }),
+      fetch(FX_API, { headers: { Accept: 'application/json' } })
+    ]);
+    if (!spotResponse.ok || !fxResponse.ok) throw new Error('Backup rate sources unavailable');
+    const spot = await spotResponse.json();
+    const fx = await fxResponse.json();
+    const usdPerOunce = Number(spot?.price);
+    const pkrPerUsd = Number(fx?.usd?.pkr);
+    if (!Number.isFinite(usdPerOunce) || usdPerOunce <= 0 || !Number.isFinite(pkrPerUsd) || pkrPerUsd <= 0) throw new Error('Backup rate data was incomplete');
+    return { gram24k: (usdPerOunce / TROY_OUNCE_IN_GRAMS) * pkrPerUsd, timestamp: spot?.updatedAt || new Date().toISOString() };
+  }
+}
+
 async function refreshGoldRates() {
   let cachedRate;
   try { cachedRate = JSON.parse(localStorage.getItem(GOLD_RATE_CACHE_KEY)); } catch (_) { /* ignore unavailable storage */ }
@@ -110,16 +137,11 @@ async function refreshGoldRates() {
   }
 
   try {
-    const response = await fetch(GOLD_RATE_API, { headers: { Accept: 'application/json' } });
-    if (!response.ok) throw new Error(`Gold rate response: ${response.status}`);
-    const data = await response.json();
-    const gram24k = Number(data?.xau?.price);
-    if (!Number.isFinite(gram24k) || gram24k <= 0) throw new Error('Gold rate data was incomplete');
-
+    const { gram24k, timestamp } = await fetchSpotGramPkr();
     const rate = {
       rate24: Math.round((gram24k * TOLA_IN_GRAMS) / 100) * 100,
       rate21: Math.round((gram24k * (21 / 24) * TOLA_IN_GRAMS) / 100) * 100,
-      timestamp: data.updated_at || data?.data_state?.as_of || new Date().toISOString(),
+      timestamp,
       day: pakistanDayKey()
     };
     localStorage.setItem(GOLD_RATE_CACHE_KEY, JSON.stringify(rate));

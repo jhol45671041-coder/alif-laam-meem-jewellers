@@ -7,7 +7,10 @@ const textForm = document.querySelector('#voice-text-form');
 const textInput = document.querySelector('#voice-text-input');
 const topicButtons = document.querySelectorAll('[data-question]');
 const RATE_API = 'https://xaus.com/api/v1/spot?currency=PKR&unit=gram&compact=1';
+const SPOT_API = 'https://api.gold-api.com/price/XAU';
+const FX_API = 'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json';
 const TOLA_IN_GRAMS = 11.6638038;
+const TROY_OUNCE_IN_GRAMS = 31.1034768;
 let recognition;
 let listening = false;
 let interimLine;
@@ -65,6 +68,12 @@ function formatPKR(amount) {
 let rateCache = null;
 let rateFetch = null;
 
+function setRateCache(gram24k) {
+  const rate24 = gram24k * TOLA_IN_GRAMS;
+  rateCache = { rate21: rate24 * 21 / 24, rate24, at: Date.now() };
+  return rateCache;
+}
+
 async function fetchGoldRate() {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 2500);
@@ -72,10 +81,21 @@ async function fetchGoldRate() {
     const response = await fetch(RATE_API, { headers: { Accept: 'application/json' }, signal: controller.signal });
     if (!response.ok) throw new Error('Rate unavailable');
     const data = await response.json();
-    const rate24 = Number(data?.xau?.price) * TOLA_IN_GRAMS;
-    if (!Number.isFinite(rate24)) throw new Error('Invalid rate');
-    rateCache = { rate21: rate24 * 21 / 24, rate24, at: Date.now() };
-    return rateCache;
+    const gram24k = Number(data?.xau?.price);
+    if (!Number.isFinite(gram24k) || gram24k <= 0) throw new Error('Invalid rate');
+    return setRateCache(gram24k);
+  } catch (_) {
+    // Backup source: live USD gold spot converted to PKR.
+    const [spotResponse, fxResponse] = await Promise.all([
+      fetch(SPOT_API, { headers: { Accept: 'application/json' } }),
+      fetch(FX_API, { headers: { Accept: 'application/json' } })
+    ]);
+    if (!spotResponse.ok || !fxResponse.ok) throw new Error('Rate unavailable');
+    const spot = await spotResponse.json();
+    const fx = await fxResponse.json();
+    const gram24k = (Number(spot?.price) / TROY_OUNCE_IN_GRAMS) * Number(fx?.usd?.pkr);
+    if (!Number.isFinite(gram24k) || gram24k <= 0) throw new Error('Invalid rate');
+    return setRateCache(gram24k);
   } finally {
     clearTimeout(timeout);
   }
