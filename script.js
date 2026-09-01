@@ -1,43 +1,51 @@
 const products = [
-  { id: 1, name: 'Sairah Solitaire Ring', category: 'Rings', type: 'Diamond ring', price: 397000, image: 'public/images/ring-solitaire.png', tag: 'NEW', description: 'A softly sculpted solitaire, designed to feel as natural as it does remarkable. Hand-finished in warm 21K gold.' },
-  { id: 2, name: 'Riva Emerald Collar', category: 'Necklaces', type: 'Gold & emerald necklace', price: 820800, image: 'public/images/necklace-riva.png', tag: 'SIGNATURE', description: 'Emerald touches meet a delicate gold collar in a piece that brings instant occasion to the everyday.' },
-  { id: 3, name: 'Mira Diamond Drops', category: 'Earrings', type: 'Diamond earrings', price: 256300, image: 'public/images/earrings-mira.png', tag: '', description: 'Fluid drops of light, individually set with certified diamonds and made to move beautifully with you.' },
-  { id: 4, name: 'Noor Twisted Bangle', category: 'Bangles', type: 'Gold bangle', price: 298800, image: 'public/images/bangle-noor.png', tag: 'BESTSELLER', description: 'A graceful twist in 21K gold, peppered with just enough sparkle. A future favourite, from day one.' },
-  { id: 9, name: 'Meher Kundan Choker', category: 'Necklaces', type: 'Kundan necklace', price: 958100, image: 'public/images/kundan-meher.png', tag: 'NEW', description: 'A celebration of old-world kundan work, ruby tones and luminous pearl drops — created to make an entrance.' },
-  { id: 10, name: 'Zareen Pearl Jhumkas', category: 'Earrings', type: 'Gold jhumka earrings', price: 324300, image: 'public/images/jhumka-zareen.png', tag: 'BESTSELLER', description: 'Ornate gold domes, hand-finished with a joyful fringe of pearls. A classic that never feels ordinary.' },
-  { id: 11, name: 'Gulbahar Polki Set', category: 'Bridal', type: 'Polki bridal set', price: 1547700, image: 'public/images/polki-gulbahar.png', tag: 'BRIDAL 2026', description: 'A regal polki and emerald set that brings the softness, light and splendour of a garden in bloom.' },
-  { id: 12, name: 'Hoor Pearl Bracelet', category: 'Bangles', type: 'Gold & pearl bracelet', price: 245200, image: 'public/images/bracelet-hoor.png', tag: '', description: 'A quietly radiant line of gold, diamond and pearls, made for the wrist you see every day.' },
-  { id: 13, name: 'Amaan Medallion', category: 'Necklaces', type: 'Gold pendant', price: 204700, image: 'public/images/pendant-amaan.png', tag: 'NEW', description: 'A small golden talisman with an emerald heart, designed for daily closeness and personal meaning.' },
-  { id: 14, name: 'Saba Ruby Stacks', category: 'Rings', type: 'Gold stackable rings', price: 280100, image: 'public/images/ring-saba.png', tag: '', description: 'Three fine bands of gold, diamond light and ruby colour. Wear one, two or the whole story.' },
-  { id: 15, name: 'Alara Maang Tikka', category: 'Bridal', type: 'Kundan head jewellery', price: 417100, image: 'public/images/maangtikka-alara.png', tag: 'NEW', description: 'A traditional bridal maang tikka, reimagined with refined kundan work and a gentle fall of pearls.' },
-  { id: 16, name: 'Nur Ruby Kada', category: 'Bangles', type: 'Gold & ruby kada', price: 468300, image: 'public/images/kada-nur.png', tag: 'NEW', description: 'A bold sculpted kada with ruby warmth and a hand-carved floral rhythm. Designed to be treasured in the everyday.' },
-  { id: 17, name: 'Firdaus Long Haar', category: 'Necklaces', type: 'Antique gold haar', price: 917900, image: 'public/images/haar-firdaus.png', tag: 'SIGNATURE', description: 'An intricate long haar in antique gold, inspired by archival floral motifs and made for moments of ceremony.' },
-  { id: 18, name: 'Pari Peacock Chandeliers', category: 'Earrings', type: 'Gold chandelier earrings', price: 376500, image: 'public/images/earrings-pari.png', tag: '', description: 'A graceful peacock-inspired pair, with lively ruby and emerald colour drawn through intricate goldwork.' },
-  { id: 19, name: 'Yaara Diamond Line', category: 'Bangles', type: 'Diamond tennis bracelet', price: 521300, image: 'public/images/bracelet-yaara.png', tag: 'NEW', description: 'A continuous, easy line of certified diamonds for a little brilliance that belongs with everything.' },
-  { id: 20, name: 'Lune Moonstone Ring', category: 'Rings', type: 'Moonstone & diamond ring', price: 317200, image: 'public/images/ring-moonstone.png', tag: '', description: 'A moonstone that catches the light in its own quiet way, set with a delicate diamond halo in yellow gold.' },
-  { id: 21, name: 'Isha Modern Mangalsutra', category: 'Necklaces', type: 'Gold mangalsutra', price: 364800, image: 'public/images/mangalsutra-isha.png', tag: 'NEW', description: 'A refined mangalsutra for daily wear, balancing traditional black beads with a fine diamond-set pendant.' },
-  { id: 22, name: 'Zoya Bridal Nath', category: 'Bridal', type: 'Gold & pearl nath', price: 228800, image: 'public/images/nath-zoya.png', tag: '', description: 'A beautifully delicate bridal nath with ruby colour, a pearl touch and a fine golden chain.' },
-  { id: 23, name: 'Anaya Kundan Haathphool', category: 'Bridal', type: 'Bridal hand jewellery', price: 628100, image: 'public/images/haathphool-anaya.png', tag: 'BRIDAL 2026', description: 'Fine floral kundan work meets pearl drops in a hand harness made for hennaed hands and joyful celebrations.' },
-  { id: 24, name: 'Dastaan Navratna Ring', category: 'Rings', type: 'Gold gemstone ring', price: 320400, image: 'public/images/ring-dastaan.png', tag: 'NEW', description: 'Nine vivid stones, one richly detailed gold setting and a story of colour made to be worn every day.' },
-  { id: 25, name: 'Noura Rose Cut Drops', category: 'Earrings', type: 'Diamond & pearl earrings', price: 298700, image: 'public/images/earrings-noura.png', tag: '', description: 'Rose cut diamonds and soft pearl drops turn a classic silhouette into something luminously modern.' },
-  { id: 26, name: 'Sultana Antique Choker', category: 'Necklaces', type: 'Antique gold choker', price: 1034500, image: 'public/images/choker-sultana.png', tag: 'SIGNATURE', description: 'A richly worked heritage choker, layered with ruby colour and a fringe of hand-set pearls.' },
-  { id: 27, name: 'Samaa Diamond Cuff', category: 'Bangles', type: 'Gold diamond cuff', price: 544900, image: 'public/images/cuff-samaa.png', tag: 'NEW', description: 'A contemporary open cuff in softly sculpted gold, lit at each end by a line of pavé diamonds.' },
-  { id: 28, name: 'Roshni Pearl Lariat', category: 'Necklaces', type: 'Gold pearl necklace', price: 325100, image: 'public/images/lariat-roshni.png', tag: '', description: 'A graceful string of gold and pearls that layers beautifully or quietly stands on its own.' },
-  { id: 29, name: 'Gul Kundan Studs', category: 'Earrings', type: 'Kundan flower studs', price: 175500, image: 'public/images/studs-gul.png', tag: 'NEW', description: 'Small kundan blooms with a ruby heart, imagined as a bright everyday touch of tradition.' },
-  { id: 30, name: 'Amara Kundan Matha Patti', category: 'Bridal', type: 'Bridal head jewellery', price: 690600, image: 'public/images/mathapatti-amara.png', tag: 'BRIDAL 2026', description: 'A luminous kundan matha patti with a gentle pearl fall, crafted for a bridal look that feels timeless.' },
-  { id: 31, name: 'Sitarah Charm Bracelet', category: 'Bangles', type: 'Gold diamond bracelet', price: 299100, image: 'public/images/bracelet-sitarah.png', tag: '', description: 'Little diamond stars dance along a fine gold chain in this joyful piece of everyday light.' },
-  { id: 5, name: 'Dilruba Choker', category: 'Bridal', type: 'Bridal necklace', price: 1098800, image: 'public/images/hero-bridal.png', tag: 'BRIDAL 2026', description: 'An opulent bridal choker layered in gold, diamonds, and all the possibility of a new beginning.' }
+  { id: 1, name: 'Sairah Solitaire Ring', category: 'Rings', type: 'Diamond ring', weight: 4.6, image: 'public/images/ring-solitaire.png', tag: 'NEW', description: 'A softly sculpted solitaire, designed to feel as natural as it does remarkable. Hand-finished in warm 21K gold.' },
+  { id: 2, name: 'Riva Emerald Collar', category: 'Necklaces', type: 'Gold & emerald necklace', weight: 34.8, image: 'public/images/necklace-riva.png', tag: 'SIGNATURE', description: 'Emerald touches meet a delicate gold collar in a piece that brings instant occasion to the everyday.' },
+  { id: 3, name: 'Mira Diamond Drops', category: 'Earrings', type: 'Diamond earrings', weight: 10.4, image: 'public/images/earrings-mira.png', tag: '', description: 'Fluid drops of light, individually set with certified diamonds and made to move beautifully with you.' },
+  { id: 4, name: 'Noor Twisted Bangle', category: 'Bangles', type: 'Gold bangle', weight: 21.8, image: 'public/images/bangle-noor.png', tag: 'BESTSELLER', description: 'A graceful twist in 21K gold, peppered with just enough sparkle. A future favourite, from day one.' },
+  { id: 9, name: 'Meher Kundan Choker', category: 'Necklaces', type: 'Kundan necklace', weight: 58.6, image: 'public/images/kundan-meher.png', tag: 'NEW', description: 'A celebration of old-world kundan work, ruby tones and luminous pearl drops — created to make an entrance.' },
+  { id: 10, name: 'Zareen Pearl Jhumkas', category: 'Earrings', type: 'Gold jhumka earrings', weight: 13.2, image: 'public/images/jhumka-zareen.png', tag: 'BESTSELLER', description: 'Ornate gold domes, hand-finished with a joyful fringe of pearls. A classic that never feels ordinary.' },
+  { id: 11, name: 'Gulbahar Polki Set', category: 'Bridal', type: 'Polki bridal set', weight: 96.4, image: 'public/images/polki-gulbahar.png', tag: 'BRIDAL 2026', description: 'A regal polki and emerald set that brings the softness, light and splendour of a garden in bloom.' },
+  { id: 12, name: 'Hoor Pearl Bracelet', category: 'Bangles', type: 'Gold & pearl bracelet', weight: 9.6, image: 'public/images/bracelet-hoor.png', tag: '', description: 'A quietly radiant line of gold, diamond and pearls, made for the wrist you see every day.' },
+  { id: 13, name: 'Amaan Medallion', category: 'Necklaces', type: 'Gold pendant', weight: 5.8, image: 'public/images/pendant-amaan.png', tag: 'NEW', description: 'A small golden talisman with an emerald heart, designed for daily closeness and personal meaning.' },
+  { id: 14, name: 'Saba Ruby Stacks', category: 'Rings', type: 'Gold stackable rings', weight: 12.6, image: 'public/images/ring-saba.png', tag: '', description: 'Three fine bands of gold, diamond light and ruby colour. Wear one, two or the whole story.' },
+  { id: 15, name: 'Alara Maang Tikka', category: 'Bridal', type: 'Kundan head jewellery', weight: 11.0, image: 'public/images/maangtikka-alara.png', tag: 'NEW', description: 'A traditional bridal maang tikka, reimagined with refined kundan work and a gentle fall of pearls.' },
+  { id: 16, name: 'Nur Ruby Kada', category: 'Bangles', type: 'Gold & ruby kada', weight: 32.4, image: 'public/images/kada-nur.png', tag: 'NEW', description: 'A bold sculpted kada with ruby warmth and a hand-carved floral rhythm. Designed to be treasured in the everyday.' },
+  { id: 17, name: 'Firdaus Long Haar', category: 'Necklaces', type: 'Antique gold haar', weight: 64.2, image: 'public/images/haar-firdaus.png', tag: 'SIGNATURE', description: 'An intricate long haar in antique gold, inspired by archival floral motifs and made for moments of ceremony.' },
+  { id: 18, name: 'Pari Peacock Chandeliers', category: 'Earrings', type: 'Gold chandelier earrings', weight: 15.8, image: 'public/images/earrings-pari.png', tag: '', description: 'A graceful peacock-inspired pair, with lively ruby and emerald colour drawn through intricate goldwork.' },
+  { id: 19, name: 'Yaara Diamond Line', category: 'Bangles', type: 'Diamond tennis bracelet', weight: 12.2, image: 'public/images/bracelet-yaara.png', tag: 'NEW', description: 'A continuous, easy line of certified diamonds for a little brilliance that belongs with everything.' },
+  { id: 20, name: 'Lune Moonstone Ring', category: 'Rings', type: 'Moonstone & diamond ring', weight: 5.2, image: 'public/images/ring-moonstone.png', tag: '', description: 'A moonstone that catches the light in its own quiet way, set with a delicate diamond halo in yellow gold.' },
+  { id: 21, name: 'Isha Modern Mangalsutra', category: 'Necklaces', type: 'Gold mangalsutra', weight: 13.4, image: 'public/images/mangalsutra-isha.png', tag: 'NEW', description: 'A refined mangalsutra for daily wear, balancing traditional black beads with a fine diamond-set pendant.' },
+  { id: 22, name: 'Zoya Bridal Nath', category: 'Bridal', type: 'Gold & pearl nath', weight: 6.8, image: 'public/images/nath-zoya.png', tag: '', description: 'A beautifully delicate bridal nath with ruby colour, a pearl touch and a fine golden chain.' },
+  { id: 23, name: 'Anaya Kundan Haathphool', category: 'Bridal', type: 'Bridal hand jewellery', weight: 27.6, image: 'public/images/haathphool-anaya.png', tag: 'BRIDAL 2026', description: 'Fine floral kundan work meets pearl drops in a hand harness made for hennaed hands and joyful celebrations.' },
+  { id: 24, name: 'Dastaan Navratna Ring', category: 'Rings', type: 'Gold gemstone ring', weight: 7.4, image: 'public/images/ring-dastaan.png', tag: 'NEW', description: 'Nine vivid stones, one richly detailed gold setting and a story of colour made to be worn every day.' },
+  { id: 25, name: 'Noura Rose Cut Drops', category: 'Earrings', type: 'Diamond & pearl earrings', weight: 11.6, image: 'public/images/earrings-noura.png', tag: '', description: 'Rose cut diamonds and soft pearl drops turn a classic silhouette into something luminously modern.' },
+  { id: 26, name: 'Sultana Antique Choker', category: 'Necklaces', type: 'Antique gold choker', weight: 72.5, image: 'public/images/choker-sultana.png', tag: 'SIGNATURE', description: 'A richly worked heritage choker, layered with ruby colour and a fringe of hand-set pearls.' },
+  { id: 27, name: 'Samaa Diamond Cuff', category: 'Bangles', type: 'Gold diamond cuff', weight: 24.8, image: 'public/images/cuff-samaa.png', tag: 'NEW', description: 'A contemporary open cuff in softly sculpted gold, lit at each end by a line of pavé diamonds.' },
+  { id: 28, name: 'Roshni Pearl Lariat', category: 'Necklaces', type: 'Gold pearl necklace', weight: 14.8, image: 'public/images/lariat-roshni.png', tag: '', description: 'A graceful string of gold and pearls that layers beautifully or quietly stands on its own.' },
+  { id: 29, name: 'Gul Kundan Studs', category: 'Earrings', type: 'Kundan flower studs', weight: 4.2, image: 'public/images/studs-gul.png', tag: 'NEW', description: 'Small kundan blooms with a ruby heart, imagined as a bright everyday touch of tradition.' },
+  { id: 30, name: 'Amara Kundan Matha Patti', category: 'Bridal', type: 'Bridal head jewellery', weight: 38.6, image: 'public/images/mathapatti-amara.png', tag: 'BRIDAL 2026', description: 'A luminous kundan matha patti with a gentle pearl fall, crafted for a bridal look that feels timeless.' },
+  { id: 31, name: 'Sitarah Charm Bracelet', category: 'Bangles', type: 'Gold diamond bracelet', weight: 10.2, image: 'public/images/bracelet-sitarah.png', tag: '', description: 'Little diamond stars dance along a fine gold chain in this joyful piece of everyday light.' },
+  { id: 5, name: 'Dilruba Choker', category: 'Bridal', type: 'Bridal necklace', weight: 68.3, image: 'public/images/hero-bridal.png', tag: 'BRIDAL 2026', description: 'An opulent bridal choker layered in gold, diamonds, and all the possibility of a new beginning.' }
 ];
 
 const state = { filter: 'All', showAll: false, cart: [], currentProduct: null };
-const fmt = new Intl.NumberFormat('en-PK', { style: 'currency', currency: 'PKR', currencyDisplay: 'code', maximumFractionDigits: 0 });
 const grid = document.querySelector('#products-grid');
 const cartDrawer = document.querySelector('.cart-drawer');
 const overlay = document.querySelector('#overlay');
 const toast = document.querySelector('.toast');
 const GOLD_RATE_API = 'https://xaus.com/api/v1/spot?currency=PKR&unit=gram&compact=1';
+const SPOT_API = 'https://api.gold-api.com/price/XAU';
+const FX_API = 'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json';
 const GOLD_RATE_CACHE_KEY = 'alm-pkr-gold-rate';
 const TOLA_IN_GRAMS = 11.6638038;
+const TROY_OUNCE_IN_GRAMS = 31.1034768;
+
+function formatWeight(product) {
+  const grams = Number(product.weight);
+  if (!Number.isFinite(grams) || grams <= 0) return '';
+  return `${grams.toFixed(1)} g (${(grams / TOLA_IN_GRAMS).toFixed(2)} tola)`;
+}
 const cursorGlow = document.querySelector('.cursor-glow');
 let toastTimer;
 
@@ -96,6 +104,30 @@ function applyGoldRate(rate, isLive = true) {
     : `Last saved ${formatRateTimestamp(rate.timestamp)} PKT · Refreshing when available`;
 }
 
+async function fetchSpotGramPkr() {
+  try {
+    const response = await fetch(GOLD_RATE_API, { headers: { Accept: 'application/json' } });
+    if (!response.ok) throw new Error(`Gold rate response: ${response.status}`);
+    const data = await response.json();
+    const gram24k = Number(data?.xau?.price);
+    if (!Number.isFinite(gram24k) || gram24k <= 0) throw new Error('Gold rate data was incomplete');
+    return { gram24k, timestamp: data.updated_at || data?.data_state?.as_of || new Date().toISOString() };
+  } catch (_) {
+    // Backup source: live USD gold spot converted to PKR.
+    const [spotResponse, fxResponse] = await Promise.all([
+      fetch(SPOT_API, { headers: { Accept: 'application/json' } }),
+      fetch(FX_API, { headers: { Accept: 'application/json' } })
+    ]);
+    if (!spotResponse.ok || !fxResponse.ok) throw new Error('Backup rate sources unavailable');
+    const spot = await spotResponse.json();
+    const fx = await fxResponse.json();
+    const usdPerOunce = Number(spot?.price);
+    const pkrPerUsd = Number(fx?.usd?.pkr);
+    if (!Number.isFinite(usdPerOunce) || usdPerOunce <= 0 || !Number.isFinite(pkrPerUsd) || pkrPerUsd <= 0) throw new Error('Backup rate data was incomplete');
+    return { gram24k: (usdPerOunce / TROY_OUNCE_IN_GRAMS) * pkrPerUsd, timestamp: spot?.updatedAt || new Date().toISOString() };
+  }
+}
+
 async function refreshGoldRates() {
   let cachedRate;
   try { cachedRate = JSON.parse(localStorage.getItem(GOLD_RATE_CACHE_KEY)); } catch (_) { /* ignore unavailable storage */ }
@@ -105,16 +137,11 @@ async function refreshGoldRates() {
   }
 
   try {
-    const response = await fetch(GOLD_RATE_API, { headers: { Accept: 'application/json' } });
-    if (!response.ok) throw new Error(`Gold rate response: ${response.status}`);
-    const data = await response.json();
-    const gram24k = Number(data?.xau?.price);
-    if (!Number.isFinite(gram24k) || gram24k <= 0) throw new Error('Gold rate data was incomplete');
-
+    const { gram24k, timestamp } = await fetchSpotGramPkr();
     const rate = {
       rate24: Math.round((gram24k * TOLA_IN_GRAMS) / 100) * 100,
       rate21: Math.round((gram24k * (21 / 24) * TOLA_IN_GRAMS) / 100) * 100,
-      timestamp: data.updated_at || data?.data_state?.as_of || new Date().toISOString(),
+      timestamp,
       day: pakistanDayKey()
     };
     localStorage.setItem(GOLD_RATE_CACHE_KEY, JSON.stringify(rate));
@@ -226,12 +253,12 @@ function conciergeReply(question) {
   const productMatch = products.find(product => query.includes(product.name.toLowerCase()));
 
   if (productMatch) {
-    setTimeout(() => { closeConcierge(); openProduct(productMatch); }, 350);
-    return `${productMatch.name} is available in our 21K gold collection for ${fmt.format(productMatch.price)}. I’m opening its details for you.`;
+    setTimeout(() => { closeConcierge(); openProduct(productMatch); }, 120);
+    return `${productMatch.name} is ${productMatch.weight.toFixed(1)} grams of 21K gold — message us on WhatsApp and we’ll share today’s price. I’m opening its details for you.`;
   }
   if (categoryMatch) {
-    setTimeout(() => setFilter(categoryMatch.category), 350);
-    return `I’ve opened our ${categoryMatch.label} collection. Every piece in The Edit is crafted in 21K gold and priced in PKR.`;
+    setTimeout(() => setFilter(categoryMatch.category), 120);
+    return `I’ve opened our ${categoryMatch.label} collection. Every piece in The Edit is crafted in 21K gold with its weight shown — message us for today’s price.`;
   }
   if (query.includes('gold rate') || query.includes('rate') || query.includes('21k') || query.includes('24k') || query.includes('tola')) {
     const rate21 = document.querySelector('[data-rate-value="21k"]').textContent.replace(/\s+/g, ' ').trim();
@@ -239,7 +266,7 @@ function conciergeReply(question) {
     return `Today’s indicative rates are ${rate21} and ${rate24}. They refresh automatically each day in PKR.`;
   }
   if (query.includes('custom') || query.includes('bespoke') || query.includes('design my') || query.includes('create')) {
-    setTimeout(() => document.querySelector('#bespoke').scrollIntoView({ behavior: 'smooth', block: 'start' }), 350);
+    setTimeout(() => document.querySelector('#bespoke').scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
     return 'Our atelier would love to create something just for you. I’ve taken you to our bespoke service — you can request a private appointment there.';
   }
   if (query.includes('visit') || query.includes('location') || query.includes('where') || query.includes('showroom') || query.includes('address')) {
@@ -249,7 +276,7 @@ function conciergeReply(question) {
     return 'You can call us at +92 311 481 7882, email AlifLaamMeemjewellers@gmail.com, or use the WhatsApp button when you would like to speak with our team.';
   }
   if (query.includes('price') || query.includes('pkr') || query.includes('cost') || query.includes('budget')) {
-    return 'All prices in The Edit are shown in PKR. Tell me whether you are looking for rings, necklaces, earrings, bangles, or bridal jewellery and I’ll take you there.';
+    return 'Every piece is priced by weight at the day’s 21K gold rate — so figures move with the market. Ask me for any piece’s weight, and message us on the WhatsApp button for today’s exact price.';
   }
   if (query.includes('hello') || query.includes('salam') || query.includes('assalam')) {
     return 'Wa alaikum assalam. How may I help you find a piece that feels like yours?';
@@ -286,7 +313,8 @@ function productCard(product) {
       <button class="quick-add">Quick add <span>→</span></button>
     </div>
     <div class="product-info"><p class="product-category">21K GOLD · ${product.type.toUpperCase()}</p>
-      <div class="product-info-top"><h3 class="product-name">${product.name}</h3><p class="product-price">${fmt.format(product.price)}</p></div>
+      <div class="product-info-top"><h3 class="product-name">${product.name}</h3></div>
+      <p class="product-weight">Net weight · ${formatWeight(product)}</p>
       <button class="product-detail-link">View details</button>
     </div>
   </article>`;
@@ -314,17 +342,15 @@ function getProduct(id) { return products.find(product => product.id === Number(
 
 function updateCart() {
   const count = state.cart.length;
-  const subtotal = state.cart.reduce((total, product) => total + product.price, 0);
   document.querySelector('.bag-count').textContent = count;
   document.querySelector('.bag-count').classList.toggle('has-items', count > 0);
   document.querySelector('.drawer-count').textContent = `(${count})`;
-  document.querySelector('.cart-subtotal').textContent = fmt.format(subtotal);
   const items = document.querySelector('.cart-items');
   const empty = document.querySelector('.empty-bag');
   const footer = document.querySelector('.cart-footer');
   empty.style.display = count ? 'none' : 'grid';
   footer.classList.toggle('active', count > 0);
-  items.innerHTML = state.cart.map((item, index) => `<div class="cart-item"><div class="cart-item-image" style="background-image:url('${item.image}')"></div><div><h3>${item.name}</h3><p>21K gold · ${item.type}</p><p class="cart-item-price">${fmt.format(item.price)}</p></div><button class="remove-item" data-index="${index}">Remove</button></div>`).join('');
+  items.innerHTML = state.cart.map((item, index) => `<div class="cart-item"><div class="cart-item-image" style="background-image:url('${item.image}')"></div><div><h3>${item.name}</h3><p>21K gold · ${item.type} · ${item.weight.toFixed(1)} g</p></div><button class="remove-item" data-index="${index}">Remove</button></div>`).join('');
 }
 
 function addToCart(product) {
@@ -364,7 +390,7 @@ function openProduct(product) {
   modal.querySelector('.product-modal-image').style.backgroundImage = `url('${product.image}')`;
   modal.querySelector('.modal-type').textContent = product.type.toUpperCase();
   modal.querySelector('.modal-name').textContent = product.name;
-  modal.querySelector('.modal-price').textContent = fmt.format(product.price);
+  modal.querySelector('.modal-weight').textContent = `Net weight · ${formatWeight(product)}`;
   modal.querySelector('.modal-description').textContent = product.description;
   modal.classList.add('active');
   modal.setAttribute('aria-hidden', 'false');
@@ -388,8 +414,46 @@ function closeAppointment() {
   document.body.classList.remove('modal-open');
 }
 
+const ACCOUNT_KEY = 'alm-account';
+function getAccount() {
+  try { return JSON.parse(localStorage.getItem(ACCOUNT_KEY)); } catch (_) { return null; }
+}
+function renderAccount() {
+  const account = getAccount();
+  const modal = document.querySelector('.account-modal');
+  modal.querySelector('.account-signed-out').hidden = Boolean(account);
+  modal.querySelector('.account-signed-in').hidden = !account;
+  document.querySelector('.account-trigger').classList.toggle('signed-in', Boolean(account));
+  if (account) {
+    const first = account.name.trim().split(/\s+/)[0];
+    modal.querySelector('.account-name').textContent = first;
+    modal.querySelector('.account-whatsapp').href = `https://wa.me/923244449745?text=${encodeURIComponent(`Assalam-o-alaikum! This is ${account.name.trim()} — I would like to know today’s prices.`)}`;
+  }
+}
+function openAccount() {
+  const modal = document.querySelector('.account-modal');
+  renderAccount();
+  modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+  setTimeout(() => { if (!getAccount()) modal.querySelector('.account-form input[name="name"]').focus(); }, 250);
+}
+function closeAccount() {
+  const modal = document.querySelector('.account-modal');
+  modal.classList.remove('active');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+}
+
 renderProducts();
 updateCart();
+renderAccount();
+const signedInAccount = getAccount();
+if (signedInAccount) {
+  const first = signedInAccount.name.trim().split(/\s+/)[0];
+  const bubble = document.querySelector('.concierge-messages .concierge-message.bot');
+  if (bubble) bubble.textContent = `Assalam-o-alaikum, ${first}. I’m your ALM concierge — ask me a piece’s weight, today’s gold rate, or anything about our 21K collection.`;
+}
 enableMouseMotion();
 refreshGoldRates();
 // The cache avoids repeat requests; this catches the next PKT day for an open storefront.
@@ -427,7 +491,13 @@ document.querySelector('.cart-items').addEventListener('click', event => {
   updateCart();
   showToast('Piece removed from your bag.');
 });
-document.querySelector('.checkout-button').addEventListener('click', () => showToast('Checkout is ready to be connected to your preferred payment provider.'));
+document.querySelector('.checkout-button').addEventListener('click', () => {
+  const pieces = state.cart.map(item => `${item.name} (${item.weight.toFixed(1)} g)`).join(', ');
+  const message = pieces
+    ? `Assalam-o-alaikum! I’d like today’s prices for these pieces: ${pieces}.`
+    : 'Assalam-o-alaikum! I would like to know more about your jewellery.';
+  window.open(`https://wa.me/923244449745?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+});
 
 document.querySelector('.search-trigger').addEventListener('click', openSearch);
 document.querySelector('.search-close').addEventListener('click', closeSearch);
@@ -465,10 +535,41 @@ conciergeForm.addEventListener('submit', event => {
 document.querySelectorAll('.concierge-prompts button').forEach(button => button.addEventListener('click', () => sendConciergeMessage(button.dataset.prompt)));
 voiceTrigger.addEventListener('click', beginVoiceConversation);
 
-document.querySelector('.account-trigger').addEventListener('click', () => showToast('Your client account experience is coming soon.'));
+document.querySelector('.account-trigger').addEventListener('click', openAccount);
+document.querySelector('.account-close').addEventListener('click', closeAccount);
+document.querySelector('.account-modal').addEventListener('click', event => { if (event.target === event.currentTarget) closeAccount(); });
+document.querySelector('.account-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const name = form.elements.name.value.trim();
+  const phone = form.elements.phone.value.trim();
+  if (!name || !phone) return;
+  try { localStorage.setItem(ACCOUNT_KEY, JSON.stringify({ name, phone })); } catch (_) { /* private mode */ }
+  renderAccount();
+  const first = name.split(/\s+/)[0];
+  form.querySelector('.account-message').textContent = '';
+  showToast(`Welcome, ${first}.`);
+  const appointment = document.querySelector('.appointment-form');
+  if (appointment) {
+    const nameField = appointment.querySelector('input[placeholder="Your name"]');
+    const phoneField = appointment.querySelector('input[placeholder="+92"]');
+    if (nameField && !nameField.value) nameField.value = name;
+    if (phoneField && !phoneField.value) phoneField.value = phone;
+  }
+});
+document.querySelector('.account-signout').addEventListener('click', () => {
+  try { localStorage.removeItem(ACCOUNT_KEY); } catch (_) { /* ignore */ }
+  renderAccount();
+  showToast('Signed out — khuda hafiz!');
+});
+document.querySelector('.mobile-account').addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('active');
+  document.querySelector('.menu-toggle').classList.remove('active');
+  openAccount();
+});
 document.querySelector('.menu-toggle').addEventListener('click', event => { const button = event.currentTarget; const nav = document.querySelector('.mobile-nav'); const open = nav.classList.toggle('active'); button.classList.toggle('active', open); button.setAttribute('aria-expanded', open); nav.setAttribute('aria-hidden', !open); });
 document.querySelectorAll('.mobile-nav a').forEach(link => link.addEventListener('click', () => { document.querySelector('.mobile-nav').classList.remove('active'); document.querySelector('.menu-toggle').classList.remove('active'); }));
 document.querySelector('.close-announcement').addEventListener('click', () => { const bar = document.querySelector('.announcement-bar'); bar.style.display = 'none'; document.querySelector('.site-header').style.top = '0'; });
 
 window.addEventListener('scroll', () => document.querySelector('.site-header').classList.toggle('scrolled', window.scrollY > 70), { passive: true });
-document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeCart(); closeSearch(); closeProduct(); closeAppointment(); closeConcierge(); } });
+document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeCart(); closeSearch(); closeProduct(); closeAppointment(); closeConcierge(); closeAccount(); } });
