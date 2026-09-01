@@ -136,7 +136,7 @@ async function respond(question, useVoice = false) {
   addTranscript('user', question);
   const pending = answer(question);
   let thinking = null;
-  const thinkingTimer = setTimeout(() => { thinking = addTranscript('bot', 'One moment, please…', true); }, 200);
+  const thinkingTimer = setTimeout(() => { thinking = addTranscript('bot', 'One moment, please…', true); }, 110);
   const reply = await pending;
   clearTimeout(thinkingTimer);
   if (thinking) thinking.remove();

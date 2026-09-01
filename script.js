@@ -253,11 +253,11 @@ function conciergeReply(question) {
   const productMatch = products.find(product => query.includes(product.name.toLowerCase()));
 
   if (productMatch) {
-    setTimeout(() => { closeConcierge(); openProduct(productMatch); }, 350);
+    setTimeout(() => { closeConcierge(); openProduct(productMatch); }, 120);
     return `${productMatch.name} is ${productMatch.weight.toFixed(1)} grams of 21K gold — message us on WhatsApp and we’ll share today’s price. I’m opening its details for you.`;
   }
   if (categoryMatch) {
-    setTimeout(() => setFilter(categoryMatch.category), 350);
+    setTimeout(() => setFilter(categoryMatch.category), 120);
     return `I’ve opened our ${categoryMatch.label} collection. Every piece in The Edit is crafted in 21K gold with its weight shown — message us for today’s price.`;
   }
   if (query.includes('gold rate') || query.includes('rate') || query.includes('21k') || query.includes('24k') || query.includes('tola')) {
@@ -266,7 +266,7 @@ function conciergeReply(question) {
     return `Today’s indicative rates are ${rate21} and ${rate24}. They refresh automatically each day in PKR.`;
   }
   if (query.includes('custom') || query.includes('bespoke') || query.includes('design my') || query.includes('create')) {
-    setTimeout(() => document.querySelector('#bespoke').scrollIntoView({ behavior: 'smooth', block: 'start' }), 350);
+    setTimeout(() => document.querySelector('#bespoke').scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
     return 'Our atelier would love to create something just for you. I’ve taken you to our bespoke service — you can request a private appointment there.';
   }
   if (query.includes('visit') || query.includes('location') || query.includes('where') || query.includes('showroom') || query.includes('address')) {
@@ -414,8 +414,46 @@ function closeAppointment() {
   document.body.classList.remove('modal-open');
 }
 
+const ACCOUNT_KEY = 'alm-account';
+function getAccount() {
+  try { return JSON.parse(localStorage.getItem(ACCOUNT_KEY)); } catch (_) { return null; }
+}
+function renderAccount() {
+  const account = getAccount();
+  const modal = document.querySelector('.account-modal');
+  modal.querySelector('.account-signed-out').hidden = Boolean(account);
+  modal.querySelector('.account-signed-in').hidden = !account;
+  document.querySelector('.account-trigger').classList.toggle('signed-in', Boolean(account));
+  if (account) {
+    const first = account.name.trim().split(/\s+/)[0];
+    modal.querySelector('.account-name').textContent = first;
+    modal.querySelector('.account-whatsapp').href = `https://wa.me/923244449745?text=${encodeURIComponent(`Assalam-o-alaikum! This is ${account.name.trim()} — I would like to know today’s prices.`)}`;
+  }
+}
+function openAccount() {
+  const modal = document.querySelector('.account-modal');
+  renderAccount();
+  modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+  setTimeout(() => { if (!getAccount()) modal.querySelector('.account-form input[name="name"]').focus(); }, 250);
+}
+function closeAccount() {
+  const modal = document.querySelector('.account-modal');
+  modal.classList.remove('active');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+}
+
 renderProducts();
 updateCart();
+renderAccount();
+const signedInAccount = getAccount();
+if (signedInAccount) {
+  const first = signedInAccount.name.trim().split(/\s+/)[0];
+  const bubble = document.querySelector('.concierge-messages .concierge-message.bot');
+  if (bubble) bubble.textContent = `Assalam-o-alaikum, ${first}. I’m your ALM concierge — ask me a piece’s weight, today’s gold rate, or anything about our 21K collection.`;
+}
 enableMouseMotion();
 refreshGoldRates();
 // The cache avoids repeat requests; this catches the next PKT day for an open storefront.
@@ -497,10 +535,41 @@ conciergeForm.addEventListener('submit', event => {
 document.querySelectorAll('.concierge-prompts button').forEach(button => button.addEventListener('click', () => sendConciergeMessage(button.dataset.prompt)));
 voiceTrigger.addEventListener('click', beginVoiceConversation);
 
-document.querySelector('.account-trigger').addEventListener('click', () => showToast('Your client account experience is coming soon.'));
+document.querySelector('.account-trigger').addEventListener('click', openAccount);
+document.querySelector('.account-close').addEventListener('click', closeAccount);
+document.querySelector('.account-modal').addEventListener('click', event => { if (event.target === event.currentTarget) closeAccount(); });
+document.querySelector('.account-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const name = form.elements.name.value.trim();
+  const phone = form.elements.phone.value.trim();
+  if (!name || !phone) return;
+  try { localStorage.setItem(ACCOUNT_KEY, JSON.stringify({ name, phone })); } catch (_) { /* private mode */ }
+  renderAccount();
+  const first = name.split(/\s+/)[0];
+  form.querySelector('.account-message').textContent = '';
+  showToast(`Welcome, ${first}.`);
+  const appointment = document.querySelector('.appointment-form');
+  if (appointment) {
+    const nameField = appointment.querySelector('input[placeholder="Your name"]');
+    const phoneField = appointment.querySelector('input[placeholder="+92"]');
+    if (nameField && !nameField.value) nameField.value = name;
+    if (phoneField && !phoneField.value) phoneField.value = phone;
+  }
+});
+document.querySelector('.account-signout').addEventListener('click', () => {
+  try { localStorage.removeItem(ACCOUNT_KEY); } catch (_) { /* ignore */ }
+  renderAccount();
+  showToast('Signed out — khuda hafiz!');
+});
+document.querySelector('.mobile-account').addEventListener('click', () => {
+  document.querySelector('.mobile-nav').classList.remove('active');
+  document.querySelector('.menu-toggle').classList.remove('active');
+  openAccount();
+});
 document.querySelector('.menu-toggle').addEventListener('click', event => { const button = event.currentTarget; const nav = document.querySelector('.mobile-nav'); const open = nav.classList.toggle('active'); button.classList.toggle('active', open); button.setAttribute('aria-expanded', open); nav.setAttribute('aria-hidden', !open); });
 document.querySelectorAll('.mobile-nav a').forEach(link => link.addEventListener('click', () => { document.querySelector('.mobile-nav').classList.remove('active'); document.querySelector('.menu-toggle').classList.remove('active'); }));
 document.querySelector('.close-announcement').addEventListener('click', () => { const bar = document.querySelector('.announcement-bar'); bar.style.display = 'none'; document.querySelector('.site-header').style.top = '0'; });
 
 window.addEventListener('scroll', () => document.querySelector('.site-header').classList.toggle('scrolled', window.scrollY > 70), { passive: true });
-document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeCart(); closeSearch(); closeProduct(); closeAppointment(); closeConcierge(); } });
+document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeCart(); closeSearch(); closeProduct(); closeAppointment(); closeConcierge(); closeAccount(); } });
