@@ -1,32 +1,32 @@
 const products = [
-  { id: 1, name: 'Sairah Solitaire Ring', category: 'Rings', type: 'Diamond ring', price: 397000, image: 'public/images/ring-solitaire.png', tag: 'NEW', description: 'A softly sculpted solitaire, designed to feel as natural as it does remarkable. Hand-finished in warm 21K gold.' },
-  { id: 2, name: 'Riva Emerald Collar', category: 'Necklaces', type: 'Gold & emerald necklace', price: 820800, image: 'public/images/necklace-riva.png', tag: 'SIGNATURE', description: 'Emerald touches meet a delicate gold collar in a piece that brings instant occasion to the everyday.' },
-  { id: 3, name: 'Mira Diamond Drops', category: 'Earrings', type: 'Diamond earrings', price: 256300, image: 'public/images/earrings-mira.png', tag: '', description: 'Fluid drops of light, individually set with certified diamonds and made to move beautifully with you.' },
-  { id: 4, name: 'Noor Twisted Bangle', category: 'Bangles', type: 'Gold bangle', price: 298800, image: 'public/images/bangle-noor.png', tag: 'BESTSELLER', description: 'A graceful twist in 21K gold, peppered with just enough sparkle. A future favourite, from day one.' },
-  { id: 9, name: 'Meher Kundan Choker', category: 'Necklaces', type: 'Kundan necklace', price: 958100, image: 'public/images/kundan-meher.png', tag: 'NEW', description: 'A celebration of old-world kundan work, ruby tones and luminous pearl drops — created to make an entrance.' },
-  { id: 10, name: 'Zareen Pearl Jhumkas', category: 'Earrings', type: 'Gold jhumka earrings', price: 324300, image: 'public/images/jhumka-zareen.png', tag: 'BESTSELLER', description: 'Ornate gold domes, hand-finished with a joyful fringe of pearls. A classic that never feels ordinary.' },
-  { id: 11, name: 'Gulbahar Polki Set', category: 'Bridal', type: 'Polki bridal set', price: 1547700, image: 'public/images/polki-gulbahar.png', tag: 'BRIDAL 2026', description: 'A regal polki and emerald set that brings the softness, light and splendour of a garden in bloom.' },
-  { id: 12, name: 'Hoor Pearl Bracelet', category: 'Bangles', type: 'Gold & pearl bracelet', price: 245200, image: 'public/images/bracelet-hoor.png', tag: '', description: 'A quietly radiant line of gold, diamond and pearls, made for the wrist you see every day.' },
-  { id: 13, name: 'Amaan Medallion', category: 'Necklaces', type: 'Gold pendant', price: 204700, image: 'public/images/pendant-amaan.png', tag: 'NEW', description: 'A small golden talisman with an emerald heart, designed for daily closeness and personal meaning.' },
-  { id: 14, name: 'Saba Ruby Stacks', category: 'Rings', type: 'Gold stackable rings', price: 280100, image: 'public/images/ring-saba.png', tag: '', description: 'Three fine bands of gold, diamond light and ruby colour. Wear one, two or the whole story.' },
-  { id: 15, name: 'Alara Maang Tikka', category: 'Bridal', type: 'Kundan head jewellery', price: 417100, image: 'public/images/maangtikka-alara.png', tag: 'NEW', description: 'A traditional bridal maang tikka, reimagined with refined kundan work and a gentle fall of pearls.' },
-  { id: 16, name: 'Nur Ruby Kada', category: 'Bangles', type: 'Gold & ruby kada', price: 468300, image: 'public/images/kada-nur.png', tag: 'NEW', description: 'A bold sculpted kada with ruby warmth and a hand-carved floral rhythm. Designed to be treasured in the everyday.' },
-  { id: 17, name: 'Firdaus Long Haar', category: 'Necklaces', type: 'Antique gold haar', price: 917900, image: 'public/images/haar-firdaus.png', tag: 'SIGNATURE', description: 'An intricate long haar in antique gold, inspired by archival floral motifs and made for moments of ceremony.' },
-  { id: 18, name: 'Pari Peacock Chandeliers', category: 'Earrings', type: 'Gold chandelier earrings', price: 376500, image: 'public/images/earrings-pari.png', tag: '', description: 'A graceful peacock-inspired pair, with lively ruby and emerald colour drawn through intricate goldwork.' },
-  { id: 19, name: 'Yaara Diamond Line', category: 'Bangles', type: 'Diamond tennis bracelet', price: 521300, image: 'public/images/bracelet-yaara.png', tag: 'NEW', description: 'A continuous, easy line of certified diamonds for a little brilliance that belongs with everything.' },
-  { id: 20, name: 'Lune Moonstone Ring', category: 'Rings', type: 'Moonstone & diamond ring', price: 317200, image: 'public/images/ring-moonstone.png', tag: '', description: 'A moonstone that catches the light in its own quiet way, set with a delicate diamond halo in yellow gold.' },
-  { id: 21, name: 'Isha Modern Mangalsutra', category: 'Necklaces', type: 'Gold mangalsutra', price: 364800, image: 'public/images/mangalsutra-isha.png', tag: 'NEW', description: 'A refined mangalsutra for daily wear, balancing traditional black beads with a fine diamond-set pendant.' },
-  { id: 22, name: 'Zoya Bridal Nath', category: 'Bridal', type: 'Gold & pearl nath', price: 228800, image: 'public/images/nath-zoya.png', tag: '', description: 'A beautifully delicate bridal nath with ruby colour, a pearl touch and a fine golden chain.' },
-  { id: 23, name: 'Anaya Kundan Haathphool', category: 'Bridal', type: 'Bridal hand jewellery', price: 628100, image: 'public/images/haathphool-anaya.png', tag: 'BRIDAL 2026', description: 'Fine floral kundan work meets pearl drops in a hand harness made for hennaed hands and joyful celebrations.' },
-  { id: 24, name: 'Dastaan Navratna Ring', category: 'Rings', type: 'Gold gemstone ring', price: 320400, image: 'public/images/ring-dastaan.png', tag: 'NEW', description: 'Nine vivid stones, one richly detailed gold setting and a story of colour made to be worn every day.' },
-  { id: 25, name: 'Noura Rose Cut Drops', category: 'Earrings', type: 'Diamond & pearl earrings', price: 298700, image: 'public/images/earrings-noura.png', tag: '', description: 'Rose cut diamonds and soft pearl drops turn a classic silhouette into something luminously modern.' },
-  { id: 26, name: 'Sultana Antique Choker', category: 'Necklaces', type: 'Antique gold choker', price: 1034500, image: 'public/images/choker-sultana.png', tag: 'SIGNATURE', description: 'A richly worked heritage choker, layered with ruby colour and a fringe of hand-set pearls.' },
-  { id: 27, name: 'Samaa Diamond Cuff', category: 'Bangles', type: 'Gold diamond cuff', price: 544900, image: 'public/images/cuff-samaa.png', tag: 'NEW', description: 'A contemporary open cuff in softly sculpted gold, lit at each end by a line of pavé diamonds.' },
-  { id: 28, name: 'Roshni Pearl Lariat', category: 'Necklaces', type: 'Gold pearl necklace', price: 325100, image: 'public/images/lariat-roshni.png', tag: '', description: 'A graceful string of gold and pearls that layers beautifully or quietly stands on its own.' },
-  { id: 29, name: 'Gul Kundan Studs', category: 'Earrings', type: 'Kundan flower studs', price: 175500, image: 'public/images/studs-gul.png', tag: 'NEW', description: 'Small kundan blooms with a ruby heart, imagined as a bright everyday touch of tradition.' },
-  { id: 30, name: 'Amara Kundan Matha Patti', category: 'Bridal', type: 'Bridal head jewellery', price: 690600, image: 'public/images/mathapatti-amara.png', tag: 'BRIDAL 2026', description: 'A luminous kundan matha patti with a gentle pearl fall, crafted for a bridal look that feels timeless.' },
-  { id: 31, name: 'Sitarah Charm Bracelet', category: 'Bangles', type: 'Gold diamond bracelet', price: 299100, image: 'public/images/bracelet-sitarah.png', tag: '', description: 'Little diamond stars dance along a fine gold chain in this joyful piece of everyday light.' },
-  { id: 5, name: 'Dilruba Choker', category: 'Bridal', type: 'Bridal necklace', price: 1098800, image: 'public/images/hero-bridal.png', tag: 'BRIDAL 2026', description: 'An opulent bridal choker layered in gold, diamonds, and all the possibility of a new beginning.' }
+  { id: 1, name: 'Sairah Solitaire Ring', category: 'Rings', type: 'Diamond ring', price: 397000, weight: 4.6, image: 'public/images/ring-solitaire.png', tag: 'NEW', description: 'A softly sculpted solitaire, designed to feel as natural as it does remarkable. Hand-finished in warm 21K gold.' },
+  { id: 2, name: 'Riva Emerald Collar', category: 'Necklaces', type: 'Gold & emerald necklace', price: 820800, weight: 34.8, image: 'public/images/necklace-riva.png', tag: 'SIGNATURE', description: 'Emerald touches meet a delicate gold collar in a piece that brings instant occasion to the everyday.' },
+  { id: 3, name: 'Mira Diamond Drops', category: 'Earrings', type: 'Diamond earrings', price: 256300, weight: 10.4, image: 'public/images/earrings-mira.png', tag: '', description: 'Fluid drops of light, individually set with certified diamonds and made to move beautifully with you.' },
+  { id: 4, name: 'Noor Twisted Bangle', category: 'Bangles', type: 'Gold bangle', price: 298800, weight: 21.8, image: 'public/images/bangle-noor.png', tag: 'BESTSELLER', description: 'A graceful twist in 21K gold, peppered with just enough sparkle. A future favourite, from day one.' },
+  { id: 9, name: 'Meher Kundan Choker', category: 'Necklaces', type: 'Kundan necklace', price: 958100, weight: 58.6, image: 'public/images/kundan-meher.png', tag: 'NEW', description: 'A celebration of old-world kundan work, ruby tones and luminous pearl drops — created to make an entrance.' },
+  { id: 10, name: 'Zareen Pearl Jhumkas', category: 'Earrings', type: 'Gold jhumka earrings', price: 324300, weight: 13.2, image: 'public/images/jhumka-zareen.png', tag: 'BESTSELLER', description: 'Ornate gold domes, hand-finished with a joyful fringe of pearls. A classic that never feels ordinary.' },
+  { id: 11, name: 'Gulbahar Polki Set', category: 'Bridal', type: 'Polki bridal set', price: 1547700, weight: 96.4, image: 'public/images/polki-gulbahar.png', tag: 'BRIDAL 2026', description: 'A regal polki and emerald set that brings the softness, light and splendour of a garden in bloom.' },
+  { id: 12, name: 'Hoor Pearl Bracelet', category: 'Bangles', type: 'Gold & pearl bracelet', price: 245200, weight: 9.6, image: 'public/images/bracelet-hoor.png', tag: '', description: 'A quietly radiant line of gold, diamond and pearls, made for the wrist you see every day.' },
+  { id: 13, name: 'Amaan Medallion', category: 'Necklaces', type: 'Gold pendant', price: 204700, weight: 5.8, image: 'public/images/pendant-amaan.png', tag: 'NEW', description: 'A small golden talisman with an emerald heart, designed for daily closeness and personal meaning.' },
+  { id: 14, name: 'Saba Ruby Stacks', category: 'Rings', type: 'Gold stackable rings', price: 280100, weight: 12.6, image: 'public/images/ring-saba.png', tag: '', description: 'Three fine bands of gold, diamond light and ruby colour. Wear one, two or the whole story.' },
+  { id: 15, name: 'Alara Maang Tikka', category: 'Bridal', type: 'Kundan head jewellery', price: 417100, weight: 11.0, image: 'public/images/maangtikka-alara.png', tag: 'NEW', description: 'A traditional bridal maang tikka, reimagined with refined kundan work and a gentle fall of pearls.' },
+  { id: 16, name: 'Nur Ruby Kada', category: 'Bangles', type: 'Gold & ruby kada', price: 468300, weight: 32.4, image: 'public/images/kada-nur.png', tag: 'NEW', description: 'A bold sculpted kada with ruby warmth and a hand-carved floral rhythm. Designed to be treasured in the everyday.' },
+  { id: 17, name: 'Firdaus Long Haar', category: 'Necklaces', type: 'Antique gold haar', price: 917900, weight: 64.2, image: 'public/images/haar-firdaus.png', tag: 'SIGNATURE', description: 'An intricate long haar in antique gold, inspired by archival floral motifs and made for moments of ceremony.' },
+  { id: 18, name: 'Pari Peacock Chandeliers', category: 'Earrings', type: 'Gold chandelier earrings', price: 376500, weight: 15.8, image: 'public/images/earrings-pari.png', tag: '', description: 'A graceful peacock-inspired pair, with lively ruby and emerald colour drawn through intricate goldwork.' },
+  { id: 19, name: 'Yaara Diamond Line', category: 'Bangles', type: 'Diamond tennis bracelet', price: 521300, weight: 12.2, image: 'public/images/bracelet-yaara.png', tag: 'NEW', description: 'A continuous, easy line of certified diamonds for a little brilliance that belongs with everything.' },
+  { id: 20, name: 'Lune Moonstone Ring', category: 'Rings', type: 'Moonstone & diamond ring', price: 317200, weight: 5.2, image: 'public/images/ring-moonstone.png', tag: '', description: 'A moonstone that catches the light in its own quiet way, set with a delicate diamond halo in yellow gold.' },
+  { id: 21, name: 'Isha Modern Mangalsutra', category: 'Necklaces', type: 'Gold mangalsutra', price: 364800, weight: 13.4, image: 'public/images/mangalsutra-isha.png', tag: 'NEW', description: 'A refined mangalsutra for daily wear, balancing traditional black beads with a fine diamond-set pendant.' },
+  { id: 22, name: 'Zoya Bridal Nath', category: 'Bridal', type: 'Gold & pearl nath', price: 228800, weight: 6.8, image: 'public/images/nath-zoya.png', tag: '', description: 'A beautifully delicate bridal nath with ruby colour, a pearl touch and a fine golden chain.' },
+  { id: 23, name: 'Anaya Kundan Haathphool', category: 'Bridal', type: 'Bridal hand jewellery', price: 628100, weight: 27.6, image: 'public/images/haathphool-anaya.png', tag: 'BRIDAL 2026', description: 'Fine floral kundan work meets pearl drops in a hand harness made for hennaed hands and joyful celebrations.' },
+  { id: 24, name: 'Dastaan Navratna Ring', category: 'Rings', type: 'Gold gemstone ring', price: 320400, weight: 7.4, image: 'public/images/ring-dastaan.png', tag: 'NEW', description: 'Nine vivid stones, one richly detailed gold setting and a story of colour made to be worn every day.' },
+  { id: 25, name: 'Noura Rose Cut Drops', category: 'Earrings', type: 'Diamond & pearl earrings', price: 298700, weight: 11.6, image: 'public/images/earrings-noura.png', tag: '', description: 'Rose cut diamonds and soft pearl drops turn a classic silhouette into something luminously modern.' },
+  { id: 26, name: 'Sultana Antique Choker', category: 'Necklaces', type: 'Antique gold choker', price: 1034500, weight: 72.5, image: 'public/images/choker-sultana.png', tag: 'SIGNATURE', description: 'A richly worked heritage choker, layered with ruby colour and a fringe of hand-set pearls.' },
+  { id: 27, name: 'Samaa Diamond Cuff', category: 'Bangles', type: 'Gold diamond cuff', price: 544900, weight: 24.8, image: 'public/images/cuff-samaa.png', tag: 'NEW', description: 'A contemporary open cuff in softly sculpted gold, lit at each end by a line of pavé diamonds.' },
+  { id: 28, name: 'Roshni Pearl Lariat', category: 'Necklaces', type: 'Gold pearl necklace', price: 325100, weight: 14.8, image: 'public/images/lariat-roshni.png', tag: '', description: 'A graceful string of gold and pearls that layers beautifully or quietly stands on its own.' },
+  { id: 29, name: 'Gul Kundan Studs', category: 'Earrings', type: 'Kundan flower studs', price: 175500, weight: 4.2, image: 'public/images/studs-gul.png', tag: 'NEW', description: 'Small kundan blooms with a ruby heart, imagined as a bright everyday touch of tradition.' },
+  { id: 30, name: 'Amara Kundan Matha Patti', category: 'Bridal', type: 'Bridal head jewellery', price: 690600, weight: 38.6, image: 'public/images/mathapatti-amara.png', tag: 'BRIDAL 2026', description: 'A luminous kundan matha patti with a gentle pearl fall, crafted for a bridal look that feels timeless.' },
+  { id: 31, name: 'Sitarah Charm Bracelet', category: 'Bangles', type: 'Gold diamond bracelet', price: 299100, weight: 10.2, image: 'public/images/bracelet-sitarah.png', tag: '', description: 'Little diamond stars dance along a fine gold chain in this joyful piece of everyday light.' },
+  { id: 5, name: 'Dilruba Choker', category: 'Bridal', type: 'Bridal necklace', price: 1098800, weight: 68.3, image: 'public/images/hero-bridal.png', tag: 'BRIDAL 2026', description: 'An opulent bridal choker layered in gold, diamonds, and all the possibility of a new beginning.' }
 ];
 
 const state = { filter: 'All', showAll: false, cart: [], currentProduct: null };
@@ -38,6 +38,12 @@ const toast = document.querySelector('.toast');
 const GOLD_RATE_API = 'https://xaus.com/api/v1/spot?currency=PKR&unit=gram&compact=1';
 const GOLD_RATE_CACHE_KEY = 'alm-pkr-gold-rate';
 const TOLA_IN_GRAMS = 11.6638038;
+
+function formatWeight(product) {
+  const grams = Number(product.weight);
+  if (!Number.isFinite(grams) || grams <= 0) return '';
+  return `${grams.toFixed(1)} g (${(grams / TOLA_IN_GRAMS).toFixed(2)} tola)`;
+}
 const cursorGlow = document.querySelector('.cursor-glow');
 let toastTimer;
 
@@ -227,7 +233,7 @@ function conciergeReply(question) {
 
   if (productMatch) {
     setTimeout(() => { closeConcierge(); openProduct(productMatch); }, 350);
-    return `${productMatch.name} is available in our 21K gold collection for ${fmt.format(productMatch.price)}. I’m opening its details for you.`;
+    return `${productMatch.name} weighs ${productMatch.weight.toFixed(1)} grams in 21K gold and is available for ${fmt.format(productMatch.price)}. I’m opening its details for you.`;
   }
   if (categoryMatch) {
     setTimeout(() => setFilter(categoryMatch.category), 350);
@@ -287,6 +293,7 @@ function productCard(product) {
     </div>
     <div class="product-info"><p class="product-category">21K GOLD · ${product.type.toUpperCase()}</p>
       <div class="product-info-top"><h3 class="product-name">${product.name}</h3><p class="product-price">${fmt.format(product.price)}</p></div>
+      <p class="product-weight">Net weight · ${formatWeight(product)}</p>
       <button class="product-detail-link">View details</button>
     </div>
   </article>`;
@@ -324,7 +331,7 @@ function updateCart() {
   const footer = document.querySelector('.cart-footer');
   empty.style.display = count ? 'none' : 'grid';
   footer.classList.toggle('active', count > 0);
-  items.innerHTML = state.cart.map((item, index) => `<div class="cart-item"><div class="cart-item-image" style="background-image:url('${item.image}')"></div><div><h3>${item.name}</h3><p>21K gold · ${item.type}</p><p class="cart-item-price">${fmt.format(item.price)}</p></div><button class="remove-item" data-index="${index}">Remove</button></div>`).join('');
+  items.innerHTML = state.cart.map((item, index) => `<div class="cart-item"><div class="cart-item-image" style="background-image:url('${item.image}')"></div><div><h3>${item.name}</h3><p>21K gold · ${item.type} · ${item.weight.toFixed(1)} g</p><p class="cart-item-price">${fmt.format(item.price)}</p></div><button class="remove-item" data-index="${index}">Remove</button></div>`).join('');
 }
 
 function addToCart(product) {
@@ -365,6 +372,7 @@ function openProduct(product) {
   modal.querySelector('.modal-type').textContent = product.type.toUpperCase();
   modal.querySelector('.modal-name').textContent = product.name;
   modal.querySelector('.modal-price').textContent = fmt.format(product.price);
+  modal.querySelector('.modal-weight').textContent = `Net weight · ${formatWeight(product)}`;
   modal.querySelector('.modal-description').textContent = product.description;
   modal.classList.add('active');
   modal.setAttribute('aria-hidden', 'false');
