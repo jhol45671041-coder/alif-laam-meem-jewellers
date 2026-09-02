@@ -34,7 +34,21 @@ button { cursor: pointer; }
 .brand-mark { color: #d4a647; font-family: Georgia, serif; font-size: 20px; letter-spacing: -5px; transform: translateY(-1px); }
 .brand-name { font-family: var(--serif); font-size: 15px; letter-spacing: .105em; font-weight: 600; white-space: nowrap; }
 .brand-name small { display: block; margin-top: 5px; text-align: center; font: 500 7px var(--mono); letter-spacing: .29em; }
-.desktop-nav { grid-column: 1; grid-row: 1; display: flex; align-items: center; gap: clamp(15px, 2.25vw, 37px); font-size: 12px; }
+/* Nav Dropdown for styles.css */
+.nav-dropdown { position: relative; display: inline-flex; align-items: center; }
+.nav-dropdown-trigger { display: inline-flex; align-items: center; gap: 5px; background: none; border: 0; color: inherit; padding: 0; font-size: inherit; font-weight: inherit; cursor: pointer; }
+.nav-dropdown-trigger svg { width: 9px; height: 9px; fill: currentColor; transition: transform .2s; }
+.nav-dropdown:hover .nav-dropdown-trigger svg { transform: rotate(180deg); }
+.nav-dropdown-menu { position: absolute; top: 100%; left: -14px; min-width: 260px; padding: 14px 0; background: #061311; color: #e7e2d7; border: 1px solid rgba(217, 173, 92, .3); box-shadow: 0 16px 40px rgba(0,0,0,.45); opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .25s, transform .25s, visibility .25s; pointer-events: none; }
+.nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+.nav-dropdown-menu a { display: flex; align-items: center; justify-content: space-between; padding: 9px 20px; font-size: 11px; color: #dad5c7; border-bottom: 1px solid rgba(255,255,255,.05); transition: background .15s, color .15s, padding-left .15s; }
+.nav-dropdown-menu a:last-child { border-bottom: 0; }
+.nav-dropdown-menu a:hover { color: #dfc08a; background: rgba(255,255,255,.06); padding-left: 24px; opacity: 1; }
+.nav-dropdown-menu a small { font: 9px var(--mono); color: #c8a96e; }
+
+.mobile-nav-group { margin: 10px 0; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.1); }
+.mobile-nav-title { font: 9px var(--mono); color: #d4a647; text-transform: uppercase; margin-bottom: 6px; letter-spacing: .08em; }
+
 .desktop-nav a, .header-actions button { transition: opacity .2s; }
 .desktop-nav a:hover, .header-actions button:hover { opacity: .63; }
 .header-actions { grid-column: 3; grid-row: 1; display: flex; justify-content: flex-end; gap: 8px; }
