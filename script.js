@@ -1,6 +1,11 @@
 const products = window.almProducts;
 
-const state = { filter: 'All', showAll: false, cart: [], currentProduct: null };
+function loadCartProducts() {
+  const saved = window.almCart?.read ? window.almCart.read() : [];
+  return saved.map(item => products.find(product => product.id === Number(item.id) || product.name === item.name)).filter(Boolean);
+}
+
+const state = { filter: 'All', showAll: false, cart: loadCartProducts(), currentProduct: null };
 const grid = document.querySelector('#products-grid');
 const cartDrawer = document.querySelector('.cart-drawer');
 const overlay = document.querySelector('#overlay');
@@ -12,11 +17,6 @@ const GOLD_RATE_CACHE_KEY = 'alm-pkr-gold-rate';
 const TOLA_IN_GRAMS = 11.6638038;
 const TROY_OUNCE_IN_GRAMS = 31.1034768;
 
-function formatWeight(product) {
-  const grams = Number(product.weight);
-  if (!Number.isFinite(grams) || grams <= 0) return '';
-  return `${grams.toFixed(1)} g (${(grams / TOLA_IN_GRAMS).toFixed(2)} tola)`;
-}
 const cursorGlow = document.querySelector('.cursor-glow');
 let toastTimer;
 
@@ -225,11 +225,11 @@ function conciergeReply(question) {
 
   if (productMatch) {
     setTimeout(() => { closeConcierge(); openProduct(productMatch); }, 120);
-    return `${productMatch.name} is ${productMatch.weight.toFixed(1)} grams of 21K gold — message us on WhatsApp and we’ll share today’s price. I’m opening its details for you.`;
+    return `${productMatch.name} is crafted in 21K gold — message us on WhatsApp and we’ll share today’s price and availability. I’m opening its details for you.`;
   }
   if (categoryMatch) {
     setTimeout(() => setFilter(categoryMatch.category), 120);
-    return `I’ve opened our ${categoryMatch.label} collection. Every piece in The Edit is crafted in 21K gold with its weight shown — message us for today’s price.`;
+    return `I’ve opened our ${categoryMatch.label} collection. Every piece in The Edit is crafted in 21K gold — message us for today’s price and availability.`;
   }
   if (query.includes('gold rate') || query.includes('rate') || query.includes('21k') || query.includes('24k') || query.includes('tola')) {
     const rate21 = document.querySelector('[data-rate-value="21k"]').textContent.replace(/\s+/g, ' ').trim();
@@ -247,7 +247,7 @@ function conciergeReply(question) {
     return 'You can call us at +92 311 481 7882, email AlifLaamMeemjewellers@gmail.com, or use the WhatsApp button when you would like to speak with our team.';
   }
   if (query.includes('price') || query.includes('pkr') || query.includes('cost') || query.includes('budget')) {
-    return 'Every piece is priced by weight at the day’s 21K gold rate — so figures move with the market. Ask me for any piece’s weight, and message us on the WhatsApp button for today’s exact price.';
+    return 'Every piece is made to order and priced by the day’s 21K gold rate. Message us on WhatsApp for today’s exact price and availability.';
   }
   if (query.includes('hello') || query.includes('salam') || query.includes('assalam')) {
     return 'Wa alaikum assalam. How may I help you find a piece that feels like yours?';
@@ -282,11 +282,10 @@ function productCard(product) {
       <img src="${product.image}" alt="${product.name}, 21K gold jewellery" loading="lazy" decoding="async" />
       ${product.tag ? `<span class="product-tag">${product.tag}</span>` : ''}
       <button class="wish-button" aria-label="Save ${product.name}" title="Save for later">♡</button>
-      <button class="quick-add">Quick add <span>→</span></button>
+      <button class="quick-add">Add to cart <span>→</span></button>
     </div>
     <div class="product-info"><p class="product-category">21K GOLD · ${product.type.toUpperCase()}</p>
       <div class="product-info-top"><h3 class="product-name">${product.name}</h3></div>
-      <p class="product-weight">Net weight · ${formatWeight(product)}</p>
       <a class="product-detail-link" href="product.html?id=${product.id}">View full details</a>
     </div>
   </article>`;
@@ -314,6 +313,7 @@ function getProduct(id) { return products.find(product => product.id === Number(
 
 function updateCart() {
   const count = state.cart.length;
+  if (window.almCart) window.almCart.save(state.cart.map(item => ({ id: item.id, name: item.name })));
   document.querySelector('.bag-count').textContent = count;
   document.querySelector('.bag-count').classList.toggle('has-items', count > 0);
   document.querySelector('.drawer-count').textContent = `(${count})`;
@@ -322,13 +322,17 @@ function updateCart() {
   const footer = document.querySelector('.cart-footer');
   empty.style.display = count ? 'none' : 'grid';
   footer.classList.toggle('active', count > 0);
-  items.innerHTML = state.cart.map((item, index) => `<div class="cart-item"><div class="cart-item-image" style="background-image:url('${item.image}')"></div><div><h3>${item.name}</h3><p>21K gold · ${item.type} · ${item.weight.toFixed(1)} g</p></div><button class="remove-item" data-index="${index}">Remove</button></div>`).join('');
+  items.innerHTML = state.cart.map((item, index) => `<div class="cart-item"><div class="cart-item-image" style="background-image:url('${item.image}')"></div><div><h3>${item.name}</h3><p>21K gold · Made to order · Price on WhatsApp</p></div><button class="remove-item" data-index="${index}">Remove</button></div>`).join('');
 }
 
 function addToCart(product) {
   state.cart.push(product);
   updateCart();
-  showToast(`${product.name} is in your bag.`);
+  const message = window.almCart?.message
+    ? window.almCart.message(state.cart.map(item => ({ id: item.id, name: item.name })))
+    : `Assalam-o-alaikum! I would like today's prices and availability for: ${state.cart.map(item => item.name).join(', ')}.`;
+  window.open(`https://wa.me/923244449745?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+  showToast(`${product.name} added — your WhatsApp message is ready.`);
 }
 
 function openCart() {
@@ -362,7 +366,6 @@ function openProduct(product) {
   modal.querySelector('.product-modal-image').style.backgroundImage = `url('${product.image}')`;
   modal.querySelector('.modal-type').textContent = product.type.toUpperCase();
   modal.querySelector('.modal-name').textContent = product.name;
-  modal.querySelector('.modal-weight').textContent = `Net weight · ${formatWeight(product)}`;
   modal.querySelector('.modal-description').textContent = product.description;
   modal.classList.add('active');
   modal.setAttribute('aria-hidden', 'false');
@@ -424,7 +427,7 @@ const signedInAccount = getAccount();
 if (signedInAccount) {
   const first = signedInAccount.name.trim().split(/\s+/)[0];
   const bubble = document.querySelector('.concierge-messages .concierge-message.bot');
-  if (bubble) bubble.textContent = `Assalam-o-alaikum, ${first}. I’m your ALM concierge — ask me a piece’s weight, today’s gold rate, or anything about our 21K collection.`;
+  if (bubble) bubble.textContent = `Assalam-o-alaikum, ${first}. I’m your ALM concierge — ask me about a piece, today’s gold rate, or anything about our 21K collection.`;
 }
 enableMouseMotion();
 refreshGoldRates();
@@ -463,13 +466,12 @@ document.querySelector('.cart-items').addEventListener('click', event => {
   if (!remove) return;
   state.cart.splice(Number(remove.dataset.index), 1);
   updateCart();
-  showToast('Piece removed from your bag.');
+  showToast('Piece removed from your cart.');
 });
 document.querySelector('.checkout-button').addEventListener('click', () => {
-  const pieces = state.cart.map(item => `${item.name} (${item.weight.toFixed(1)} g)`).join(', ');
-  const message = pieces
-    ? `Assalam-o-alaikum! I’d like today’s prices for these pieces: ${pieces}.`
-    : 'Assalam-o-alaikum! I would like to know more about your jewellery.';
+  const message = window.almCart?.message
+    ? window.almCart.message(state.cart.map(item => ({ id: item.id, name: item.name })))
+    : `Assalam-o-alaikum! I would like today's prices for: ${state.cart.map(item => item.name).join(', ')}.`;
   window.open(`https://wa.me/923244449745?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
 });
 

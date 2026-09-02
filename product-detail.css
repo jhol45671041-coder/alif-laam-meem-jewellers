@@ -12,7 +12,6 @@
 .product-detail-badge { display: inline-block; margin-bottom: 15px; padding: 5px 8px; color: var(--alm-ink); background: var(--alm-gold-bright); font: 8px var(--alm-mono); letter-spacing: .08em; }
 .product-detail-type { margin: 0 0 11px; color: #868a81; font: 9px var(--alm-mono); letter-spacing: .12em; text-transform: uppercase; }
 .product-details h1 { margin: 0; font: 500 clamp(40px, 4.6vw, 65px)/1.05 var(--alm-serif); letter-spacing: -.055em; }
-.product-detail-weight { margin: 15px 0 0; color: #a07835; font: 10px var(--alm-mono); letter-spacing: .07em; }
 .product-detail-description { max-width: 480px; margin: 22px 0 0; color: #656a62; font-size: 13px; line-height: 1.8; }
 .product-price-panel { margin: 28px 0 23px; padding: 17px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid var(--alm-line); border-bottom: 1px solid var(--alm-line); }
 .product-price-panel span { color: #7b7f76; font: 9px var(--alm-mono); letter-spacing: .07em; }

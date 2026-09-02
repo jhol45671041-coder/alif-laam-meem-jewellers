@@ -10,10 +10,6 @@ const params = new URLSearchParams(window.location.search);
 const requestedId = Number(params.get('id'));
 const product = allProducts.find(item => item.id === requestedId) || allProducts[0];
 
-function tolaWeight(grams) {
-  return (Number(grams) / 11.6638038).toFixed(2);
-}
-
 function stoneLabel(type) {
   const value = type.toLowerCase();
   if (value.includes('diamond')) return 'Certified diamonds';
@@ -36,7 +32,6 @@ function renderProduct() {
   const categoryPage = categoryRoutes[product.category] || 'all-jewellery.html';
   const reference = `ALM-${String(product.id).padStart(3, '0')}`;
   const name = product.name;
-  const weight = Number(product.weight);
   const image = document.querySelector('#product-detail-image');
   const badge = document.querySelector('#product-badge');
   const categoryLink = document.querySelector('#product-category-link');
@@ -63,10 +58,10 @@ function renderProduct() {
   setText('#product-reference', reference);
   setText('#product-detail-type', product.type.toUpperCase());
   setText('#product-detail-name', name);
-  setText('#product-detail-weight', `NET WEIGHT · ${weight.toFixed(1)} g · ${tolaWeight(weight)} TOLA`);
   setText('#product-detail-description', product.description);
   setText('#product-stones', stoneLabel(product.type));
   if (whatsapp) {
+    whatsapp.dataset.productId = String(product.id);
     whatsapp.dataset.product = name;
     whatsapp.href = `https://wa.me/923244449745?text=${encodeURIComponent(`Assalam-o-alaikum! I would like to enquire about ${name}. Please share today's price, availability and delivery details.`)}`;
   }
@@ -97,7 +92,6 @@ function renderStructuredData() {
     category: product.category,
     material: '21K gold',
     brand: { '@type': 'Brand', name: 'Alif Laam Meem Jewellers' },
-    weight: { '@type': 'QuantitativeValue', value: Number(product.weight), unitCode: 'GRM' },
     url: `${window.location.origin}${window.location.pathname}?id=${product.id}`
   };
   const script = document.createElement('script');
@@ -116,7 +110,7 @@ function renderRelated() {
     if (empty) empty.style.display = 'block';
     return;
   }
-  grid.innerHTML = related.map(item => `<a class="related-card reveal revealed" href="product.html?id=${item.id}"><span class="related-card-image" style="background-image:url('${item.image}')" aria-hidden="true"></span><span class="related-card-content"><p>${item.category} · 21K GOLD</p><h3>${item.name}</h3><span>${Number(item.weight).toFixed(1)} g · View piece ↗</span></span></a>`).join('');
+  grid.innerHTML = related.map(item => `<a class="related-card reveal revealed" href="product.html?id=${item.id}"><span class="related-card-image" style="background-image:url('${item.image}')" aria-hidden="true"></span><span class="related-card-content"><p>${item.category} · 21K GOLD</p><h3>${item.name}</h3><span>Made to order · View piece ↗</span></span></a>`).join('');
 }
 
 const referenceButton = document.querySelector('.product-secondary-action');

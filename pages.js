@@ -1,9 +1,5 @@
 const WHATSAPP_NUMBER = '923244449745';
 
-function whatsappUrl(message = 'Assalam-o-alaikum! I would like to know more about your jewellery.') {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-}
-
 function setupAnnouncement() {
   const bar = document.querySelector('.announcement-bar');
   const close = document.querySelector('.announcement-close');
@@ -92,15 +88,61 @@ function setupCatalogFilters() {
   update('all');
 }
 
-function setupInquiryButtons() {
-  document.querySelectorAll('.tile-inquire, [data-whatsapp]').forEach(button => {
-    if (button.dataset.whatsappBound) return;
-    button.dataset.whatsappBound = 'true';
+function cartItems() {
+  return window.almCart?.read ? window.almCart.read() : [];
+}
+
+function updatePageCartBar(bar) {
+  const items = cartItems();
+  const count = bar.querySelector('[data-cart-count]');
+  const messageLink = bar.querySelector('[data-cart-whatsapp]');
+  const names = items.map(item => item.name).filter(Boolean);
+  bar.hidden = !items.length;
+  if (count) count.textContent = items.length;
+  if (messageLink && window.almCart?.whatsappUrl) {
+    messageLink.href = window.almCart.whatsappUrl(items);
+    messageLink.setAttribute('aria-label', `Message ALM about ${items.length} selected piece${items.length === 1 ? '' : 's'}`);
+  }
+  bar.querySelector('[data-cart-summary]').textContent = names.length === 1 ? names[0] : `${items.length} pieces selected`;
+}
+
+function createPageCartBar() {
+  if (!window.almCart || document.querySelector('.page-cart-bar')) return null;
+  const bar = document.createElement('aside');
+  bar.className = 'page-cart-bar';
+  bar.hidden = true;
+  bar.setAttribute('aria-label', 'Selected jewellery');
+  bar.innerHTML = `<div><strong><span data-cart-count>0</span> in your cart</strong><span data-cart-summary></span></div><button type="button" data-cart-clear>Clear</button><a class="button button-gold" data-cart-whatsapp href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener noreferrer">Message on WhatsApp <span>↗</span></a>`;
+  document.body.appendChild(bar);
+  bar.querySelector('[data-cart-clear]').addEventListener('click', () => {
+    window.almCart.clear();
+    updatePageCartBar(bar);
+  });
+  updatePageCartBar(bar);
+  return bar;
+}
+
+function addToWhatsAppCart(button, bar) {
+  const name = button.dataset.product || 'a jewellery piece';
+  const id = button.dataset.productId || '';
+  const items = window.almCart.add({ id, name });
+  updatePageCartBar(bar);
+  const original = button.textContent;
+  button.textContent = 'Added · WhatsApp ↗';
+  window.setTimeout(() => { button.textContent = original; }, 2200);
+  // Adding a piece opens the direct WhatsApp enquiry; the cart bar remains available for a multi-piece message.
+  window.open(window.almCart.whatsappUrl(items), '_blank', 'noopener,noreferrer');
+}
+
+function setupCart() {
+  const bar = createPageCartBar();
+  if (!bar) return;
+  document.querySelectorAll('.tile-inquire, [data-cart-add]').forEach(button => {
+    if (button.dataset.cartBound) return;
+    button.dataset.cartBound = 'true';
     button.addEventListener('click', event => {
-      if (button.tagName === 'A' && !button.dataset.whatsapp) return;
       event.preventDefault();
-      const product = button.dataset.product || 'a jewellery piece';
-      window.open(whatsappUrl(`Assalam-o-alaikum! I would like to enquire about ${product}. Please share today's price and availability.`), '_blank', 'noopener,noreferrer');
+      addToWhatsAppCart(button, bar);
     });
   });
 }
@@ -140,7 +182,7 @@ setupAnnouncement();
 setupHeader();
 setupReveal();
 setupCatalogFilters();
-setupInquiryButtons();
+setupCart();
 setupForms();
 setupSmoothLinks();
 setupFooterYear();
