@@ -1,0 +1,14 @@
+.policy-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.policy-card { min-height: 215px; padding: 24px 20px; border: 1px solid rgba(24, 33, 31, .2); background: #f5f0e7; }
+.policy-card > span { color: #a17838; font: 8px var(--alm-mono); letter-spacing: .09em; }
+.policy-card h3 { margin: 25px 0 9px; font: 500 23px/1.14 var(--alm-serif); letter-spacing: -.03em; }
+.policy-card p { margin: 0; color: var(--alm-muted); font-size: 11px; line-height: 1.7; }
+.faq-list { max-width: 880px; border-top: 1px solid var(--alm-line); }
+.faq-list details { border-bottom: 1px solid var(--alm-line); }
+.faq-list summary { padding: 18px 38px 18px 0; position: relative; color: var(--alm-ink); list-style: none; cursor: pointer; font: 500 22px var(--alm-serif); letter-spacing: -.025em; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { content: '+'; position: absolute; top: 14px; right: 5px; color: var(--alm-gold); font: 25px var(--alm-sans); font-weight: 300; }
+.faq-list details[open] summary::after { content: '−'; }
+.faq-list details p { max-width: 680px; margin: -3px 40px 19px 0; color: var(--alm-muted); font-size: 12px; line-height: 1.75; }
+@media (max-width: 850px) { .policy-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px) { .policy-grid { grid-template-columns: 1fr 1fr; gap: 10px; }.policy-card { min-height: 230px; padding: 18px 14px; }.policy-card h3 { margin-top: 18px; font-size: 20px; }.policy-card p { font-size: 10px; }.faq-list summary { font-size: 20px; }.faq-list details p { font-size: 11px; } }

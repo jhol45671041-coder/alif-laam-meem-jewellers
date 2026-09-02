@@ -43,7 +43,10 @@ function setupHeader() {
 
   const current = document.body.dataset.page;
   document.querySelectorAll('[data-page-link]').forEach(link => {
-    if (link.dataset.pageLink === current) link.classList.add('active');
+    if (link.dataset.pageLink === current) {
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
+    }
   });
 }
 
