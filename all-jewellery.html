@@ -23,28 +23,67 @@
 <header class="page-header" id="top">
   <div class="page-header-inner">
     <button class="page-menu-toggle" aria-label="Open navigation" aria-expanded="false"><i></i><i></i></button>
-    <a class="page-brand" href="index.html" aria-label="Alif Laam Meem Jewellers home"><span class="page-brand-mark">ا ل م</span><span class="page-brand-name">ALIF LAAM MEEM<small>JEWELLERS</small></span></a>
+    <a class="page-brand" href="index.html" aria-label="Alif Laam Meem Jewellers home">
+      <span class="page-brand-mark">ا ل م</span>
+      <span class="page-brand-name">ALIF LAAM MEEM<small>JEWELLERS</small></span>
+    </a>
     <nav class="page-nav" aria-label="Main navigation">
-      <a data-page-link="collections" href="rings.html">Collections</a>
-      <a data-page-link="story" href="intro.html">Our story</a>
-      <a data-page-link="craft" href="craft.html">Our craft</a>
-      <a data-page-link="bespoke" href="bespoke.html">Bespoke</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" type="button" aria-haspopup="true">Collections <svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></button>
+        <div class="nav-dropdown-menu">
+          <a href="rings.html"><span>Rings Edit</span><small>10 Designs</small></a>
+          <a href="bridal.html"><span>Bridal Edit 2026</span><small>Signature</small></a>
+          <a href="necklaces.html"><span>Necklaces &amp; Haars</span><small>13 Designs</small></a>
+          <a href="earrings.html"><span>Earrings &amp; Jhumkas</span><small>11 Designs</small></a>
+          <a href="bangles.html"><span>Bangles &amp; Bracelets</span><small>10 Designs</small></a>
+          <a href="everyday-gold.html"><span>Everyday Gold</span><small>Minimal</small></a>
+          <a href="heirloom.html"><span>Heirloom &amp; Polki</span><small>Royal</small></a>
+          <a href="new-arrivals.html"><span>New Arrivals 2026</span><small>Latest</small></a>
+          <a href="all-jewellery.html"><span>Complete Catalogue</span><small>50 Pieces</small></a>
+        </div>
+      </div>
+      <a data-page-link="story" href="intro.html">Our Story</a>
+      <a data-page-link="craft" href="craft.html">Our Craft</a>
+      <a data-page-link="bespoke" href="bespoke.html">Bespoke Atelier</a>
       <a data-page-link="journal" href="journal.html">Journal</a>
+      <a data-page-link="care" href="care.html">Care &amp; FAQs</a>
+      <a data-page-link="contact" href="contact.html">Contact</a>
     </nav>
     <div class="page-actions">
-      <a class="page-action" href="all-jewellery.html#pieces" aria-label="Explore all jewellery"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.2 4.2"></path></svg><span>Explore all</span></a>
-      <a class="page-action inquire-action" href="contact.html">Book a viewing <span>↗</span></a>
+      <button class="page-action-btn search-trigger" aria-label="Search jewellery" title="Search pieces">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.2 4.2"></path></svg>
+      </button>
+      <button class="page-action-btn bag-trigger" aria-label="View shopping bag" title="Shopping Bag">
+        <svg viewBox="0 0 24 24"><path d="M5.2 8.6h13.6l-1 11H6.2z"></path><path d="M9 9V6.5A3 3 0 0 1 12 3.6a3 3 0 0 1 3 2.9V9"></path></svg>
+        <span class="page-badge-count bag-count">0</span>
+      </button>
+      <a class="page-cta-link" href="contact.html">Book Viewing <span>&nearr;</span></a>
     </div>
   </div>
   <nav class="page-mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
-    <a data-page-link="home" href="index.html">Home</a>
-    <a data-page-link="collections" href="rings.html">Collections</a>
-    <a href="bridal.html">Bridal edit</a>
-    <a data-page-link="story" href="intro.html">Our story</a>
-    <a data-page-link="craft" href="craft.html">Our craft</a>
-    <a data-page-link="bespoke" href="bespoke.html">Bespoke</a>
-    <a data-page-link="journal" href="journal.html">Journal</a>
-    <button class="mobile-action" onclick="location.href='contact.html'">Book an appointment <span>↗</span></button>
+    <a href="index.html">Home</a>
+    <div class="mobile-menu-section">
+      <div class="mobile-menu-label">Collections</div>
+      <a href="rings.html">&bull; Rings Edit</a>
+      <a href="bridal.html">&bull; Bridal Edit 2026</a>
+      <a href="necklaces.html">&bull; Necklaces &amp; Haars</a>
+      <a href="earrings.html">&bull; Earrings &amp; Jhumkas</a>
+      <a href="bangles.html">&bull; Bangles &amp; Bracelets</a>
+      <a href="everyday-gold.html">&bull; Everyday Gold</a>
+      <a href="heirloom.html">&bull; Heirloom &amp; Polki</a>
+      <a href="new-arrivals.html">&bull; New Arrivals 2026</a>
+      <a class="active" href="all-jewellery.html">&bull; Complete 50-Piece Catalogue</a>
+    </div>
+    <div class="mobile-menu-section">
+      <div class="mobile-menu-label">The House &amp; Services</div>
+      <a href="intro.html">&bull; Our Story &amp; Heritage</a>
+      <a href="craft.html">&bull; Master Karigari &amp; Craft</a>
+      <a href="bespoke.html">&bull; Bespoke Atelier</a>
+      <a href="journal.html">&bull; Editorial Journal</a>
+      <a href="care.html">&bull; Care Guide &amp; FAQs</a>
+      <a href="contact.html">&bull; Boutiques &amp; Appointments</a>
+      <a href="voice-concierge.html">&bull; AI Voice Concierge</a>
+    </div>
   </nav>
 </header>
 
@@ -261,12 +300,68 @@
 </main>
     <section class="newsletter-band reveal"><div><p class="page-eyebrow">A NOTE FROM US</p><h2>For new pieces,<br/>stories and a little <em>golden</em> inspiration.</h2></div><form class="newsletter-form"><label class="sr-only" for="newsletter-email">Your email address</label><input id="newsletter-email" type="email" placeholder="Your email address" required/><button type="submit">Subscribe <span>→</span></button><p class="newsletter-status" role="status"></p></form></section>
 <footer class="site-footer">
-  <div class="footer-top"><a class="footer-brand" href="index.html"><span class="page-brand-mark">ا ل م</span><span class="page-brand-name">ALIF LAAM MEEM<small>JEWELLERS</small></span></a><p>Jewellery that carries your story.</p><div class="footer-socials"><a href="https://www.instagram.com/alifl_aammeemjewellers/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a><a href="https://www.facebook.com/share/1BUtcV9hP3/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a></div></div>
-  <div class="footer-grid"><div><h4>EXPLORE</h4><a href="rings.html">Rings</a><a href="bridal.html">Bridal</a><a href="necklaces.html">Necklaces</a><a href="earrings.html">Earrings</a><a href="bangles.html">Bangles & bracelets</a></div><div><h4>DISCOVER</h4><a href="everyday-gold.html">Everyday gold</a><a href="heirloom.html">Heirloom edit</a><a href="all-jewellery.html">All jewellery</a><a href="new-arrivals.html">New arrivals</a><a href="intro.html">Our story</a><a href="craft.html">Our craft</a><a href="care.html">Client care</a><a href="bespoke.html">Bespoke atelier</a><a href="journal.html">Journal</a></div><div><h4>VISIT US</h4><address>Al Rehman Square Mall, Shop #8<br/>123, Al Rehman Garden Phase 2<br/>Sharaqpur, Lahore, Pakistan</address><a href="tel:+923114817882">+92 311 481 7882</a><a href="mailto:AlifLaamMeemjewellers@gmail.com">AlifLaamMeemjewellers@gmail.com</a><a href="https://maps.app.goo.gl/UECVETk9s7mBT7g5A" target="_blank" rel="noopener noreferrer">Get directions ↗</a></div></div>
-  <div class="footer-bottom"><span>© <span data-year>2026</span> ALIF LAAM MEEM JEWELLERS</span><div class="footer-bottom-links"><a href="contact.html">Client care</a><a href="care.html">Jewellery care</a><a href="voice-concierge.html">ALM concierge</a></div><a href="#top">BACK TO TOP ↑</a></div>
+  <div class="footer-top">
+    <a class="footer-brand" href="index.html">
+      <span class="page-brand-mark">ا ل م</span>
+      <span class="page-brand-name">ALIF LAAM MEEM<small>JEWELLERS</small></span>
+    </a>
+    <p>Heirloom jewellery crafted in certified 21K gold for every chapter of your story.</p>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/alifl_aammeemjewellers/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+      <a href="https://www.facebook.com/share/1BUtcV9hP3/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+    </div>
+  </div>
+  <div class="footer-grid">
+    <div>
+      <h4>COLLECTIONS</h4>
+      <a href="rings.html">Rings Edit</a>
+      <a href="bridal.html">Bridal 2026</a>
+      <a href="necklaces.html">Necklaces &amp; Haars</a>
+      <a href="earrings.html">Earrings &amp; Jhumkas</a>
+      <a href="bangles.html">Bangles &amp; Bracelets</a>
+    </div>
+    <div>
+      <h4>EDITS &amp; SPECIALS</h4>
+      <a href="everyday-gold.html">Everyday Gold</a>
+      <a href="heirloom.html">Heirloom &amp; Polki</a>
+      <a href="new-arrivals.html">New Arrivals 2026</a>
+      <a href="all-jewellery.html">Complete 50-Piece Catalogue</a>
+      <a href="bespoke.html">Bespoke Atelier</a>
+    </div>
+    <div>
+      <h4>THE HOUSE</h4>
+      <a href="intro.html">Our Story &amp; Heritage</a>
+      <a href="craft.html">Master Karigari</a>
+      <a href="journal.html">Editorial Journal</a>
+      <a href="care.html">Jewellery Care &amp; FAQs</a>
+      <a href="voice-concierge.html">AI Voice Concierge</a>
+    </div>
+    <div>
+      <h4>FLAGSHIP ATELIER</h4>
+      <address>
+        Al Rehman Square Mall, Shop #8<br/>
+        123, Al Rehman Garden Phase 2<br/>
+        Sharaqpur, Lahore, Pakistan
+      </address>
+      <a href="tel:+923114817882">+92 311 481 7882</a>
+      <a href="mailto:AlifLaamMeemjewellers@gmail.com">AlifLaamMeemjewellers@gmail.com</a>
+      <a href="https://maps.app.goo.gl/UECVETk9s7mBT7g5A" target="_blank" rel="noopener noreferrer">Get Directions &nearr;</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; <span data-year>2026</span> ALIF LAAM MEEM JEWELLERS &bull; ALL RIGHTS RESERVED</span>
+    <div class="footer-bottom-links">
+      <a href="care.html#warranty">Lifetime Warranty</a>
+      <a href="care.html#purity">BIS Hallmarking</a>
+      <a href="contact.html">VIP Viewings</a>
+      <a href="voice-concierge.html">Voice Concierge</a>
+    </div>
+    <a href="#top">BACK TO TOP &uarr;</a>
+  </div>
 </footer>
 <a class="whatsapp-pill" data-whatsapp data-product="a jewellery consultation" href="https://wa.me/923244449745" target="_blank" rel="noopener noreferrer" aria-label="Chat with Alif Laam Meem Jewellers on WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.4a12.3 12.3 0 0 0-10.5 18.7L4 28l6.1-1.5A12.3 12.3 0 1 0 16 3.4Z"></path><path d="M11.7 9.7c-.4-.9-.8-.9-1.2-.9h-.7c-.3 0-.8.1-1.2.6s-1.6 1.5-1.6 3.7 1.6 4.3 1.9 4.6c.3.3 3.2 5.1 7.8 6.9 3.8 1.5 4.6 1.2 5.4 1.1.8-.1 2.6-1.1 2.9-2.2.4-1 .4-2 .3-2.2-.1-.2-.3-.3-.7-.5s-2.6-1.3-3-1.5c-.4-.1-.7-.2-1 .2s-1.1 1.5-1.4 1.8c-.2.3-.5.3-.9.1-.4-.2-1.8-.7-3.4-2.2-1.2-1.1-2-2.5-2.3-2.9s0-.7.2-.9l.7-.8c.2-.2.3-.4.4-.7.1-.3 0-.5-.1-.7l-1.2-2.9Z"></path></svg><span>WhatsApp us</span></a>
 
+    <script src="catalog-data.js"></script>
     <script src="cart.js"></script>
     <script src="pages.js"></script>
   </body>
